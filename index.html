@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./favicon.ico">
+
+    <title>Random Travelers</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top" style="background:black;">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Random Travelers</a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Menu1 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu3</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu4</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <div class="row">
+        <div class="col-md-3 mb-3">
+          <label for="time">One way travel time</label>
+          <select class="custom-select d-block w-100" id="time" required>
+            <option value="6">6 hour </option>
+            <option value="12">12 hour</option>
+            <option value="18">18 hour</option>
+            <option value="24">24 hour </option>
+            <option value="upper">upper</option>
+          </select>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="amount">One way upper Limit</label>
+          <select class="custom-select d-block w-100" id="amount" required>
+            <option value="1000">$ 1,000</option>
+            <option value="2000">$ 2,000</option>
+            <option value="3000">$ 3,000</option>
+            <option value="4000">$ 4,000</option>
+            <option value="5000">$ 5,000</option>
+            <option value="upper">upper</option>
+          </select>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="submit" style="color:tomato;"> Submit </label>
+          <button type="button" class="btn btn-primary btn-block" onclick="sample()" style="border-color:tomato; background:tomato; color:black;">Submit</button>
+        </div>
+      </div>
+      
+      <div class="starter-template bg-dark">
+        <!-- <p class="lead">People who make thier decisions decided by Cloud Native.</p> -->
+        <div class="mx-auto" id="output" style="width:250px; height:250px; margin:20px; color:tomato; font-size:30px;">Are you ready?</div>
+      </div>
+
+      <div class="starter-template">
+        <p class="lead">--- 3.2.1 counter ---</p>
+        TBD
+      </div>
+
+      <div class="starter-template">
+        <p class="lead">--- google map ---</p>
+        TBD
+      </div>
+
+      <div class="starter-template">
+        <p class="lead">--- travel plan list ---</p>
+        TBD
+      </div>
+
+    </div><!-- /.container -->
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/script.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

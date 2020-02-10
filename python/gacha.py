@@ -7,13 +7,12 @@ import codecs
 import subprocess
 
 
-# サイトからデータを持ってくる
+# import data
 try:
     url = 'https://restcountries.eu/rest/v2/all?fields=region;name'
     res = urllib.request.urlopen(url)
     data = json.loads(res.read().decode('utf-8'))
 
-    # 検証用
     # for x in data:
         # print(x, file=codecs.open('output.txt', 'a', 'utf-8'))
 
@@ -23,7 +22,7 @@ except json.JSONDecodeError as e:
     print('JSONDecodeError: ', e)
 
 
-# リージョンをランダムで選択
+# Select region randomly
 def region():
     region = []
     region_list = []
@@ -37,7 +36,7 @@ def region():
     country(region_result)
 
 
-# 更に選んだリージョンの国をランダムで選択
+# Select country randomly
 def country(val):
     country = []
 
@@ -48,7 +47,6 @@ def country(val):
     country_result = random.choice(country)
     print(country_result)
 
-    # 検証用
     # print(subprocess.check_output("cat /home/centos/random-travelers/output.txt | grep \"" + country_result + "\"", shell=True))
     # print(subprocess.check_output("rm /home/centos/random-travelers/output.txt", shell=True))
 
