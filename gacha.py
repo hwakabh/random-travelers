@@ -22,8 +22,9 @@ except json.JSONDecodeError as e:
     print('JSONDecodeError: ', e)
 
 
-# Select region randomly
-def region():
+def get_country():
+
+    # Select region randomly
     region = []
     region_list = []
 
@@ -32,23 +33,14 @@ def region():
             region.append(data[x]['region'])
 
     region_result = random.choice(list(set(region)))
-    print(region_result)
-    country(region_result)
 
-
-# Select country randomly
-def country(val):
+    # Select country randomly
     country = []
 
     for x in range(0,len(data)):
-        if data[x]['region'] == val:
+        if data[x]['region'] == region_result:
             country.append(data[x]['name'])
 
     country_result = random.choice(country)
-    print(country_result)
-
-    # print(subprocess.check_output("cat /home/centos/random-travelers/output.txt | grep \"" + country_result + "\"", shell=True))
-    # print(subprocess.check_output("rm /home/centos/random-travelers/output.txt", shell=True))
-
-region()
+    return country_result
 

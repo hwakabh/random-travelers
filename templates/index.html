@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./favicon.ico">
+
+    <title>Random Travelers</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+  </head>
+
+  <body>
+
+    <!-- menu -->
+    <div class="container" style="position:fixed; width:100%; top:3%; z-index:100;">
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body" style="padding:10px;">
+              <h4 class="card-title">Random Travelers</h4>
+              <p class="card-text" id="describe">Random travelers will support your trip. You can choose a one-way time limit and travel cost limit.</p>
+              <h4 class="card-title" id="region" style="color:dodgerblue;"></h4>
+              <div class="container">
+                <div class="row">
+                  <div class="col-xs-8" style="padding:5px;">
+                    <select class="custom-select w-100" id="time" required>
+                      <option value="6">6 hour </option>
+                      <option value="12">12 hour</option>
+                      <option value="18">18 hour</option>
+                      <option value="24">24 hour </option>
+                      <option value="upper">upper</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-8" style="padding:5px;">
+                    <select class="custom-select w-100" id="amount" required>
+                      <option value="1000">$ 1,000</option>
+                      <option value="2000">$ 2,000</option>
+                      <option value="3000">$ 3,000</option>
+                      <option value="4000">$ 4,000</option>
+                      <option value="5000">$ 5,000</option>
+                      <option value="upper">upper</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-8" style="padding:5px;">
+                    <button type="button" class="btn btn-primary" onclick="gacha()">Go!</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Google Map -->
+    <div id="map"></div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{url_for('static', filename='ie10-viewport-bug-workaround.js')}}"></script>
+
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOokebHRajnbQ3vys-YCgEVkgOEJjRq0o&language=ja"></script>
+
+  </body>
+</html>
