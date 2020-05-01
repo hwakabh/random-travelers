@@ -1,17 +1,23 @@
 // Output the result of selecting a country at random.
 // Display the location of the selected country on a google map.
 function gacha(){
+
+  document.getElementById("title").style.display ="none";
+  document.getElementById("describe").style.display ="none";
+  document.getElementById("country").style.display = "inline-block";
+  document.getElementById("country-ja").style.display = "inline-block";
+  document.getElementById("country").innerHTML = "";
+  document.getElementById("country-ja").innerHTML = "";
+
   $.ajax({
     type: 'POST',
-    url: '/gacha',
+    url: '/gacha_v01',
     data: '',
   })
   .done(function(result) {
 
     // Output the result of selecting a country at random.
     var output = result;
-    document.getElementById("title").style.display ="none";
-    document.getElementById("describe").style.display ="none";
     document.getElementById("country").innerHTML = output;
 
     var xhr = new XMLHttpRequest();
@@ -21,7 +27,7 @@ function gacha(){
       if(xhr.readyState === 4 && xhr.status === 200) {
         //console.log(xhr.responseText);
         var data = JSON.parse(xhr.responseText);
-        document.getElementById("country").append(" #" + data.text);
+        document.getElementById("country-ja").innerHTML = " " + data.text;
       }
     }
     

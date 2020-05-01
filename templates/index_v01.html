@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style_v01.css')}}">
 
   </head>
 
   <body>
 
-    <!-- pallet -->
-    <div class="container fixed-top" style="top:3%; max-height:97%; overflow:auto;">
+    <!-- menu -->
+    <div class="container fixed-top" style="top:3%;">
       <div class="row">
         <div class="col-md-3">
         </div>
@@ -32,56 +32,36 @@
               <h4 class="card-title" id="title" style="display:inline-block;">Random Travelers</h4>
               <p class="card-text" id="describe">Random travelers will support your trip. You can choose a one-way time limit and travel cost limit.</p>
               <h4 class="card-title" id="country" style="color:dodgerblue; display:none;"></h4>
-              <h4 class="card-text" id="country_ja" style="color:dodgerblue; display:none;"></h4>
-              <p class="card-text" id="city" style="color:dodgerblue; display:none;"></p>
-              <p class="card-text" id="search" style="display:none;"></p>
+              <h4 class="card-title" id="country-ja" style="color:dodgerblue; display:none;"></h4>
               <div class="container">
                 <div class="row">
                   <div class="col-xs-8" style="padding:5px;">
-                    <select class="custom-select w-100" id="time_limit" required>
+                    <select class="custom-select w-100" id="time" required>
                       <option value="6">6 hour </option>
                       <option value="12">12 hour</option>
                       <option value="18">18 hour</option>
                       <option value="24">24 hour </option>
-                      <option value="unlimited">unlimited</option>
+                      <option value="upper">upper</option>
                     </select>
                   </div>
                   <div class="col-xs-8" style="padding:5px;">
-                    <select class="custom-select w-100" id="expense_limit" required>
+                    <select class="custom-select w-100" id="amount" required>
                       <option value="1000">$ 1,000</option>
                       <option value="2000">$ 2,000</option>
                       <option value="3000">$ 3,000</option>
                       <option value="4000">$ 4,000</option>
                       <option value="5000">$ 5,000</option>
-                      <option value="unlimited">unlimited</option>
+                      <option value="upper">upper</option>
                     </select>
                   </div>
                   <div class="col-xs-8" style="padding:5px;">
-                    <button id="submit" type="button" class="btn btn-primary d-inline-block" onclick="gacha()" style="background:dodgerblue; border-color:dodgerblue;">Go!</button>
-                    <button id="load" class="btn btn-primary d-none" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Search...</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="container" id="detail" style="margin-bottom:10px; display:none;">
-              <div class="accordion" id="detail-ac">
-                <div class="card">
-                  <button class="btn btn-link" id="detail-hd" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">detail</button>
-                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#detail-ac">
-                    <div class="card-body" style="text-align:left; padding:10px;">
-                      <ul class="list-group list-group-flush" id="detail-item">
-                      </ul>
-                    </div>
+                    <button type="button" class="btn btn-primary" onclick="gacha()" style="background:dodgerblue; border-color:dodgerblue;">Go!</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- old version link -->
-          <a href="./v01">ver01</a>
-
-          </div>
+        </div>
         <div class="col-md-3">
         </div>
       </div>
@@ -98,7 +78,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/script_v01.js')}}"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{url_for('static', filename='js/ie10-viewport-bug-workaround.js')}}"></script>
