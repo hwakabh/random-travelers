@@ -1,6 +1,11 @@
 ci:
+- '.github/*.yml'
 - '.github/*.yaml'
 - '.github/workflows/**/*'
+
+deps:
+- 'pyproject.toml'
+- 'poetry.lock'
 
 docs:
 - '**/*.md'
