@@ -12,8 +12,8 @@ app.config['JSON_AS_ASCII'] = False
 
 conn = mydb.connect(
     host='localhost',
-    user='mysql',
-    password='Password',
+    user='root',
+    password='root',
     database='rt',
     charset="utf8"
 )
@@ -65,9 +65,9 @@ def get_destination_from_skyscanner_by_random(near_airport_IATA,time_limit,expen
     # --- search and get reachable location (airport and country) from skyscanner api
     # --- exclude if time and travel expenses exceed the user input parameter
 
-    ########################################################################################## 
-    ##################################### Update required ##################################### 
-    ########################################################################################### 
+    ##########################################################################################
+    ##################################### Update required #####################################
+    ###########################################################################################
 
     #reachable_airport_IATA = ["TXL","YTD","CQS","NYR","QFG","NZE","IWK"]
 
@@ -82,9 +82,9 @@ def get_destination_from_skyscanner_by_random(near_airport_IATA,time_limit,expen
     cur.close()
     conn.close()
 
-    ########################################################################################## 
-    ########################################################################################## 
-    ########################################################################################## 
+    ##########################################################################################
+    ##########################################################################################
+    ##########################################################################################
 
     #--- select a country at random
     random_airport_IATA = random.choice(reachable_airport_IATA)

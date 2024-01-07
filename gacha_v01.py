@@ -9,7 +9,7 @@ import subprocess
 
 # import data
 try:
-    url = 'https://restcountries.eu/rest/v2/all?fields=region;name'
+    url = 'https://restcountries.com/v3.1/all?fields=region;name'
     res = urllib.request.urlopen(url)
     data = json.loads(res.read().decode('utf-8'))
 
