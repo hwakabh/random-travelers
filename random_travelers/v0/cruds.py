@@ -1,4 +1,4 @@
-from flask import jsonify
+import json
 import mysql.connector as mydb
 import random
 
@@ -102,7 +102,7 @@ def get_destination_from_skyscanner_by_random(near_airport_IATA,time_limit,expen
     cur.close()
     conn.close()
 
-    return jsonify({"tran_country":transit[0][0], "tran_city":transit[0][1], "tran_iata":transit[0][2], "tran_airport":transit[0][3], "tran_lat":transit[0][4], "tran_lng":transit[0][5],"dest_country":destination[0][0], "dest_city":destination[0][1],"dest_iata":destination[0][2], "dest_airport":destination[0][3], "dest_lat":destination[0][4], "dest_lng":destination[0][5]})
+    return json.dumps({"tran_country":transit[0][0], "tran_city":transit[0][1], "tran_iata":transit[0][2], "tran_airport":transit[0][3], "tran_lat":transit[0][4], "tran_lng":transit[0][5],"dest_country":destination[0][0], "dest_city":destination[0][1],"dest_iata":destination[0][2], "dest_airport":destination[0][3], "dest_lat":destination[0][4], "dest_lng":destination[0][5]})
 
 
 #--- Distance calculation between two points
