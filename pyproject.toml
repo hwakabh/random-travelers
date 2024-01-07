@@ -11,8 +11,9 @@ packages = [{include = "random_travelers"}]
 python = "^3.11"
 requests = "^2.31.0"
 numpy = "^1.26.3"
-flask = "^3.0.0"
 mysql-connector-python = "^8.2.0"
+fastapi = "^0.108.0"
+uvicorn = "^0.25.0"
 
 
 [build-system]

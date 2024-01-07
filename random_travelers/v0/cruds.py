@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
-
-from flask import Flask, jsonify, request
+from flask import jsonify
 import mysql.connector as mydb
 import random
 
 from math import sin, cos, acos, radians
 import numpy as np
 
-app = Flask(__name__)
-app.config['JSON_AS_ASCII'] = False
 
 conn = mydb.connect(
     host='localhost',
