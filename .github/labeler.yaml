@@ -1,0 +1,6 @@
+ci:
+- '.github/*.yaml'
+- '.github/workflows/**/*'
+
+docs:
+- '**/*.md'
