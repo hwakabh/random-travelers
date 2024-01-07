@@ -15,7 +15,17 @@ c0abdba6a3e6   bitnami/mysql:latest   "/opt/bitnami/script…"   30 seconds ago 
 ```
 
 For ruuning Python application locally, we have to install dependencies packages onto local, but we prefer to use virutalenv for creating separate/isolated Python runtime.
+Code basis would be managed by poetry, so you can install deps simply like below:
 
+```bash
+# Install dependencies
+% poetry install
+
+# Start app within virtualenv
+% poetry run uvicorn random_travelers.main:app --port=3000 --reload
+```
+
+In case you would not use poetry:
 ```bash
 # Name of virtualenv `.venv` is just an example so you can use what you like
 % python -m venv .venv
@@ -26,5 +36,12 @@ For ruuning Python application locally, we have to install dependencies packages
 % pip list
 
 # Starting application
-% python main.py
+% uvicorn random_travelers.main:app --port=3000 --reload
+```
+
+Then you can confirm API for health check would be valid, so that application startup would have been successed
+```bash
+# validate with /healthz
+% curl -X GET localhost:3000/healthz
+{"status":"ok"}
 ```
