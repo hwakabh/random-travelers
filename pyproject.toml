@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "random-travelers"
+version = "0.0.1"
+description = "People who make thier decisions decided by Cloud Native"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "random_travelers"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+numpy = "^1.26.3"
+flask = "^3.0.0"
+mysql-connector-python = "^8.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
