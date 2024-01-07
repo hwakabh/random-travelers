@@ -1,4 +1,5 @@
 ci:
+- '.github/*.yml'
 - '.github/*.yaml'
 - '.github/workflows/**/*'
 
