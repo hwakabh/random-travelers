@@ -10,5 +10,5 @@ docs:
 - changed-files:
   - any-glob-to-any-file: ['**/*.md']
 
-bugs:
+bug:
 - head-branch: ['^fix/', '^hotfix/']
