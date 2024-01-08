@@ -16,7 +16,7 @@ app.mount(path='/static', app=StaticFiles(directory='./app/static'), name='stati
 @app.get('/', response_class=HTMLResponse)
 def root():
     tmpl = Template(filename='./app/templates/index.html.mako')
-    return tmpl.render(ctx='This is v1 templates')
+    return tmpl.render(ctx='v1')
 
 
 @app.get('/healthz')
