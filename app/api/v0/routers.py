@@ -7,9 +7,7 @@ router = APIRouter()
 
 @router.get('/')
 def index():
-    return '/api/v0/ root URL'
-    # TODO: replace render_template for FastAPI
-    # return render_template('index.html')
+    return {"path": "v0 API root, /api/v0/"}
 
 
 @router.get('/gacha')

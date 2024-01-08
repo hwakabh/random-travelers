@@ -1,20 +1,16 @@
 from fastapi import APIRouter
-from fastapi.responses import HTMLResponse
-
-from mako.template import Template
 
 from .cruds import get_country
 
 
 router = APIRouter()
 
-@router.get('/', response_class=HTMLResponse)
+@router.get('/')
 def index():
-    tmpl = Template(filename='templates/index_v01.html')
-    return tmpl.render(ctx='This is v1 templates')
+    return {"path": "v1 API root, /api/v1/"}
 
 
-@router.get('/gacha_v01')
-def gacha_ver01_result():
+@router.post('/shuffle')
+def get_random_country():
     result = get_country()
     return result

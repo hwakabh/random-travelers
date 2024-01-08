@@ -1,6 +1,6 @@
 // Output the result of selecting a country at random.
 // Display the location of the selected country on a google map.
-function gacha(){
+function executeShuffle(){
 
   document.getElementById("title").style.display ="none";
   document.getElementById("describe").style.display ="none";
@@ -11,7 +11,7 @@ function gacha(){
 
   $.ajax({
     type: 'POST',
-    url: '/gacha_v01',
+    url: '/api/v1/shuffle',
     data: '',
   })
   .done(function(result) {
@@ -30,7 +30,7 @@ function gacha(){
         document.getElementById("country-ja").innerHTML = " " + data.text;
       }
     }
-    
+
     // Display the location of the selected country on a google map.
     var geocoder = new google.maps.Geocoder();
 
