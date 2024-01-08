@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../static/img/favicon.ico">
-    <link rel="apple-touch-icon" href="../static/img/icon.png">
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/static/img/icon.png">
 
     <title>Random Travelers</title>
 
@@ -21,7 +21,6 @@
   <body>
 
     <!-- menu -->
-    <h1> ${ctx} </h1>
     <div class="container fixed-top" style="top:3%;">
       <div class="row">
         <div class="col-md-3">
@@ -29,8 +28,8 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-body" style="padding:10px;">
-              <img src="../static/img/icon.png" style="width:40px; margin-right:5px; margin-bottom:5px; border-radius: 50%;">
-              <h4 class="card-title" id="title" style="display:inline-block;">Random Travelers</h4>
+              <img src="/static/img/icon.png" style="width:40px; margin-right:5px; margin-bottom:5px; border-radius: 50%;">
+              <h4 class="card-title" id="title" style="display:inline-block;">Random Travelers ${ctx}</h4>
               <p class="card-text" id="describe">Random travelers will support your trip. You can choose a one-way time limit and travel cost limit.</p>
               <h4 class="card-title" id="country" style="color:dodgerblue; display:none;"></h4>
               <h4 class="card-title" id="country-ja" style="color:dodgerblue; display:none;"></h4>
@@ -56,7 +55,7 @@
                     </select>
                   </div>
                   <div class="col-xs-8" style="padding:5px;">
-                    <button type="button" class="btn btn-primary" onclick="gacha()" style="background:dodgerblue; border-color:dodgerblue;">Go!</button>
+                    <button type="button" class="btn btn-primary" onclick="executeShuffle()" style="background:dodgerblue; border-color:dodgerblue;">Go!</button>
                   </div>
                 </div>
               </div>
