@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "random_travelers"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12.1"
 requests = "^2.31.0"
 numpy = "^1.26.3"
 mysql-connector-python = "^8.2.0"
