@@ -1,6 +1,9 @@
 # random-travelers
 People who make thier decisions decided by Cloud Native
 
+## Prerequisites
+Since random-travelers application would handle location information, the app requires us to allow location service enabled in client side.
+
 ## Run application locally
 As random-travelers application requires relational database, we have to prepare database before starting application program.
 The most handy and easy way to start database is using container, and considering security we basically expect [`bitnami/mysql`](https://bitnami.com/stack/mysql/containers) container for local docker environment.
