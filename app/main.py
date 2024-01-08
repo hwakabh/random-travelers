@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+from mako.template import Template
 
-from .v0.routers import router as router_v0
-from .v1.routers import router as router_v1
+from .api.v0.routers import router as router_v0
+from .api.v1.routers import router as router_v1
 
 app = FastAPI(
     title="random-travelers",
@@ -9,9 +11,10 @@ app = FastAPI(
 )
 
 
-@app.get('/')
+@app.get('/', response_class=HTMLResponse)
 def root():
-    return {}
+    tmpl = Template(filename='./app/templates/index.html.mako')
+    return tmpl.render(ctx='This is v1 templates')
 
 
 @app.get('/healthz')
@@ -24,6 +27,7 @@ app.include_router(
     prefix='/api/v0',
     tags=['API v0'],
 )
+
 
 app.include_router(
     router_v1,
