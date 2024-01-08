@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="/static/css/style_v01.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
   </head>
 
@@ -79,7 +79,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/script_v01.js"></script>
+    <script src="/static/js/script.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
