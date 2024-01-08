@@ -1,17 +1,14 @@
 ci:
 - changed-files:
-  - any-glob-to-any-file: '.github/*.yml'
-  - any-glob-to-any-file: '.github/*.yaml'
-  - any-glob-to-any-file: '.github/workflows/**/*'
+  - any-glob-to-any-file: ['.github/*.yml', '.github/*.yaml', '.github/workflows/**/*']
 
 deps:
 - changed-files:
-  - any-glob-to-any-file: 'pyproject.toml'
-  - any-glob-to-any-file: 'poetry.lock'
+  - any-glob-to-any-file: ['pyproject.toml', 'poetry.lock']
 
 docs:
 - changed-files:
-  - any-glob-to-any-file: '**/*.md'
+  - any-glob-to-any-file: ['**/*.md']
 
 bugs:
 - head-branch: ['^fix/', '^hotfix/']
