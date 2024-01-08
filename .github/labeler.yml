@@ -1,6 +1,14 @@
 ci:
-- '.github/*.yaml'
-- '.github/workflows/**/*'
+- changed-files:
+  - any-glob-to-any-file: ['.github/*.yml', '.github/*.yaml', '.github/workflows/**/*']
+
+deps:
+- changed-files:
+  - any-glob-to-any-file: ['pyproject.toml', 'poetry.lock']
 
 docs:
-- '**/*.md'
+- changed-files:
+  - any-glob-to-any-file: ['**/*.md']
+
+bugs:
+- head-branch: ['^fix/', '^hotfix/']

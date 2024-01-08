@@ -1,28 +1,22 @@
-# -*- coding: utf-8 -*-
-
 import json
 import urllib.request
 import random
-import codecs
-import subprocess
-
-
-# import data
-try:
-    url = 'https://restcountries.com/v3.1/all?fields=region;name'
-    res = urllib.request.urlopen(url)
-    data = json.loads(res.read().decode('utf-8'))
-
-    # for x in data:
-        # print(x, file=codecs.open('output.txt', 'a', 'utf-8'))
-
-except urllib.error.HTTPError as e:
-    print('HTTPError: ', e)
-except json.JSONDecodeError as e:
-    print('JSONDecodeError: ', e)
 
 
 def get_country():
+    # import data
+    try:
+        url = 'https://restcountries.com/v3.1/all?fields=region;name'
+        res = urllib.request.urlopen(url)
+        data = json.loads(res.read().decode('utf-8'))
+
+        # for x in data:
+            # print(x, file=codecs.open('output.txt', 'a', 'utf-8'))
+
+    except urllib.error.HTTPError as e:
+        print('HTTPError: ', e)
+    except json.JSONDecodeError as e:
+        print('JSONDecodeError: ', e)
 
     # Select region randomly
     region = []
