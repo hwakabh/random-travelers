@@ -22,7 +22,7 @@ Code basis would be managed by poetry, so you can install deps simply like below
 % poetry install
 
 # Start app within virtualenv
-% poetry run uvicorn random_travelers.main:app --port=3000 --reload
+% poetry run uvicorn app.main:app --port=3000 --reload
 ```
 
 In case you would not use poetry:
@@ -36,7 +36,7 @@ In case you would not use poetry:
 % pip list
 
 # Starting application
-% uvicorn random_travelers.main:app --port=3000 --reload
+% uvicorn app.main:app --port=3000 --reload
 ```
 
 Then you can confirm API for health check would be valid, so that application startup would have been successed
