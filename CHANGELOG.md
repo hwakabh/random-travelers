@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.1](https://github.com/hwakabh/random-travelers/compare/v0.1.0...v0.1.1) (2024-01-09)
+
+
+### Bug Fixes
+
+* removed unexpected inputs. ([b442b2c](https://github.com/hwakabh/random-travelers/commit/b442b2c86c8c68ca82718063d4003bfe46ab4c05))
+* Update labeler.yml ([7734d16](https://github.com/hwakabh/random-travelers/commit/7734d16e689b4f4eff50aaecd78a238f9dec6b4b))
+* used proper URL path for API call. ([4ee955b](https://github.com/hwakabh/random-travelers/commit/4ee955b3e1c43f59154917386103badde36ca3f7))
+
+
+### Documentation
+
+* added descriptions of prerequisites. ([c2f75e1](https://github.com/hwakabh/random-travelers/commit/c2f75e1a67fd7d1340c10b1a0722b217295f842f))
+
 ## 0.1.0 (2024-01-08)
 
 
