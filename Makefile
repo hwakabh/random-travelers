@@ -29,6 +29,8 @@ db: --check-docker ## Starting MySQL container
 		-e MYSQL_DATABASE='rt' \
 		-e MYSQL_ROOT_PASSWORD='root' \
 		bitnami/mysql:latest
+	@echo ''
+	@sleep 10
 
 
 install: --check-poetry ## Install all dependencies for app
@@ -42,6 +44,10 @@ show: --check-poetry --check-docker ## Show related components for app
 	@echo ''
 	@echo ">>> Containers running on machine"
 	@docker container ls --all
+	@echo ''
+	@echo ">>> Application process"
+	@ps -ef |grep uvicorn |grep -v 'grep' || true
+	@echo ''
 
 
 all: ## Start all componentes of portal-core app
@@ -54,6 +60,12 @@ clean: ## Remove components
 	@echo ">>> Removing MySQL containers ..."
 	@docker stop ${MYSQL_CONTAINER_NAME} 2> /dev/null || true
 	@docker rm ${MYSQL_CONTAINER_NAME} 2> /dev/null || true
+	@echo ''
+	@echo ">>> Stopping application process ..."
+	@pkill -f uvicorn || true
+	@echo ''
+	@echo ">>> Cleaning up container network ..."
+	@echo ''
 
 
 help: ## Print this help
