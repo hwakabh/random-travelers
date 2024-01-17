@@ -23,7 +23,7 @@ MYSQL_CONTAINER_NAME := "rt-mysql"
 
 db: --check-docker ## Starting MySQL container
 	@echo ">>> Starting MySQL container ..."
-	@docker start ${MYSQL_CONTAINER_NAME} 2> /dev/null || docker run -d	\
+	@docker start ${MYSQL_CONTAINER_NAME} 2> /dev/null || docker run -d \
 		--name ${MYSQL_CONTAINER_NAME} \
 		-p 3306:3306 \
 		-e MYSQL_DATABASE='rt' \
