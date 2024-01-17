@@ -28,15 +28,15 @@ db: --check-docker ## Starting MySQL container
 		-p 3306:3306 \
 		-e MYSQL_DATABASE='rt' \
 		-e MYSQL_ROOT_PASSWORD='root' \
-    --health-cmd "mysqladmin ping" \
-    --health-interval 10s \
-    --health-retries 5 \
-    --health-timeout 5s \
+		--health-cmd "mysqladmin ping" \
+		--health-interval 10s \
+		--health-retries 5 \
+		--health-timeout 5s \
 		bitnami/mysql:latest
 	@echo ''
 	@until [ "`docker inspect -f {{.State.Health.Status}} $MYSQL_CONTAINER_NAME`"=="healthy" ]; do \
-    sleep 0.1; \
-  done
+		sleep 3; \
+	done
 
 
 install: --check-poetry ## Install all dependencies for app
