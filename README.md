@@ -45,6 +45,6 @@ In case you would not use poetry:
 Then you can confirm API for health check would be valid, so that application startup would have been successed
 ```bash
 # validate with /healthz
-% curl -X GET localhost:3000/healthz
+% curl -X GET localhost:3000/healthz; echo
 {"status":"ok"}
 ```
