@@ -9,6 +9,12 @@ As random-travelers application requires relational database, we have to prepare
 The most handy and easy way to start database is using container, and considering security we basically expect [`bitnami/mysql`](https://bitnami.com/stack/mysql/containers) container for local docker environment.
 For further information about `bitnami/mysql`, please refer [the sources in GitHub](https://github.com/bitnami/containers/tree/main/bitnami/mysql).
 
+Since we have prepared Makefile to launch app easily with some subcommands, just run:
+```bash
+% make all
+```
+
+If you would like to run containers with docker command directly:
 ```bash
 # Start MySQL container with setting root password & creating database
 % docker run -d --name rt -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=rt bitnami/mysql:latest
