@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.2.0](https://github.com/hwakabh/random-travelers/compare/v0.1.1...v0.2.0) (2024-01-18)
+
+
+### Features
+
+* enabled to fetch JavaScript contexts via backend for security: [#40](https://github.com/hwakabh/random-travelers/issues/40). ([12d6d2f](https://github.com/hwakabh/random-travelers/commit/12d6d2f762431ad73736138f6034a75364f3627c))
+
+
+### Bug Fixes
+
+* Go templates syntax with docker command. ([73ad8ec](https://github.com/hwakabh/random-travelers/commit/73ad8eca4d1390ac958cfda8ffd4e05d6f23cfd5))
+* minor changes ([6580da1](https://github.com/hwakabh/random-travelers/commit/6580da1a9f0c07344612e4651e8e30f323934291))
+* minor changes. ([92108ef](https://github.com/hwakabh/random-travelers/commit/92108ef78a5b295852ca12546caea3bc63ee9e54))
+* modified config file path for jobs. ([1bf5a24](https://github.com/hwakabh/random-travelers/commit/1bf5a24d6f080c5fb01b5278588fa9bef8cd64c9))
+* updated logics of readiness probes. ([9e619a1](https://github.com/hwakabh/random-travelers/commit/9e619a19ca09382710586af1a495d91e55dff1d3))
+
+
+### Documentation
+
+* added make command to README.md ([e7c0ec1](https://github.com/hwakabh/random-travelers/commit/e7c0ec1486e865c6c8a3ca68cda5482be47e7bb5))
+
 ## [0.1.1](https://github.com/hwakabh/random-travelers/compare/v0.1.0...v0.1.1) (2024-01-09)
 
 
