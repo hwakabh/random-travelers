@@ -1,24 +1,26 @@
-name: Build
+name: Publish
 
 on:
   push:
     branches:
-      - '**'
-      - '!main'
+      - main
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build image
+  build_and_ship:
+    name: Build & Ship OCI image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup python
-        uses: actions/setup-python@v5
+      - name: Login to GHCR
+        uses: docker/login-action@v3
         with:
-          python-version-file: '.python-version'
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        # https://github.com/docker/login-action#github-container-registry
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -27,23 +29,14 @@ jobs:
         run: |
           poetry export -o requirements.txt --without-hashes
 
-      - name: Security Test of Trivy with filesystem-mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          scan-ref: './'
-          trivy-config: .github/configs/trivy.yaml
-          # https://github.com/aquasecurity/trivy-action
-
       - name: Install pack
         uses: buildpacks/github-actions/setup-pack@v5.5.1
         # https://github.com/buildpacks/github-actions#setup-pack-cli-action
 
-      - name: Build image locally
+      - name: Publish packages
         run: |
           pack build ghcr.io/hwakabh/random-travelers:latest \
             --builder gcr.io/buildpacks/builder:latest \
             --path . \
             --env "$(cat .python-version)" \
-
-      # - name: Sanity Check with /healthz
+            --publish
