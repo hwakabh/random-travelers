@@ -28,6 +28,10 @@ jobs:
           installer-parallel: true
         # https://github.com/snok/install-poetry
 
+      - name: Install dependencies
+        run: |
+          poetry install
+
       - name: Run pytest
         run:
           make db && poetry run pytest -s --verbosity=3
