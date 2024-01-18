@@ -16,7 +16,13 @@ app.mount(path='/static', app=StaticFiles(directory='./app/static'), name='stati
 @app.get('/', response_class=HTMLResponse)
 def root():
     tmpl = Template(filename='./app/templates/index.html.mako')
-    return tmpl.render(ctx='v1')
+
+    ctx = {
+      "time": [6, 12, 18, 24],
+      "amount": [1000, 2000, 3000, 4000, 5000]
+    }
+
+    return tmpl.render(ctx=ctx)
 
 
 @app.get('/healthz')
