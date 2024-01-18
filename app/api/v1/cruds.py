@@ -6,7 +6,7 @@ import random
 def get_country():
     # import data
     try:
-        url = 'https://restcountries.com/v3.1/all?fields=region;name'
+        url = 'https://restcountries.com/v3.1/all?fields=region,name'
         res = urllib.request.urlopen(url)
         data = json.loads(res.read().decode('utf-8'))
 
@@ -33,7 +33,7 @@ def get_country():
 
     for x in range(0,len(data)):
         if data[x]['region'] == region_result:
-            country.append(data[x]['name'])
+            country.append(data[x]['name']['official'])
 
     country_result = random.choice(country)
     return country_result
