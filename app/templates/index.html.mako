@@ -76,8 +76,6 @@
   <script src="/static/js/script.js"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOokebHRajnbQ3vys-YCgEVkgOEJjRq0o&language=ja"></script>
 
 </body>
 </html>
