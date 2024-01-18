@@ -2,8 +2,8 @@
 // Display the location of the selected country on a google map.
 function executeShuffle(){
 
-  document.getElementById("title").style.display ="none";
-  document.getElementById("describe").style.display ="none";
+  document.getElementById("title").style.display = "none";
+  document.getElementById("describe").style.display = "none";
   document.getElementById("country").style.display = "inline-block";
   document.getElementById("country-ja").style.display = "inline-block";
   document.getElementById("country").innerHTML = "";
@@ -21,6 +21,7 @@ function executeShuffle(){
     document.getElementById("country").innerHTML = output;
 
     var xhr = new XMLHttpRequest();
+    // TODO: need to updated with another way
     xhr.open('GET','https://script.google.com/macros/s/AKfycbw64MMQ9W8oyCPGvDxRvTg4VActbv2ww8XC0wuv62VXMriCVtY/exec?text=' + result + '&source=en&target=ja');
     xhr.send();
     xhr.onreadystatechange = function() {

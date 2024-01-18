@@ -17,18 +17,22 @@
 
 <body>
   <!-- menu -->
-  <div class="container fixed-top" style="top:3%;">
+  <div class="container fixed-top menu-wrapper">
     <div class="row justify-content-md-center">
 
       <div class="col-md-6">
         <div class="card">
-          <div class="card-body" style="padding:10px;">
+          <div class="card-body main-card">
 
             <img class="bot-icon" src="/static/img/icon.png">
             <h4 class="card-title" id="title">Random Travelers</h4>
-            <p class="card-text">
+            <p class="card-text" id="describe">
               Random travelers will support your trip. You can choose a one-way time limit and travel cost limit.
             </p>
+
+            <h4 class="card-title country" id="country"></h4>
+            <h4 class="card-title country" id="country-ja"></h4>
+
 
             <div class="container">
               <div class="row">

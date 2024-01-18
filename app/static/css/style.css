@@ -9,11 +9,9 @@ body {
   color: gray;
 }
 
-#map {
-  width: 100%;
-  height: 100%;
+.menu-wrapper {
+  top:3%;
 }
-
 
 img.bot-icon {
   width:40px;
@@ -22,8 +20,17 @@ img.bot-icon {
   border-radius: 50%;
 }
 
+.main-card {
+  padding:10px;
+}
+
 h4#title {
   display:inline-block;
+}
+
+h4.country {
+  color:dodgerblue;
+  display:none;
 }
 
 .user-opt {
@@ -37,4 +44,9 @@ h4#title {
 button.shuffle {
   background:dodgerblue;
   border-color:dodgerblue;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
 }
