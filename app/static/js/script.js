@@ -1,9 +1,65 @@
-// Output the result of selecting a country at random.
-// Display the location of the selected country on a google map.
+
+window.onload = async function() {
+  const res = await fetch("/api/v1/fetch");
+  const src = await res.text();
+  const script = document.createElement("script");
+  script.textContent = src;
+  document.body.appendChild(script);
+  initMap();
+
+  // Search the current location and display it on google map.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        var mapLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        var mapOptions = {
+          zoom : 3,
+          center : mapLatLng
+        };
+        var map = new google.maps.Map(
+          document.getElementById("map"),
+          mapOptions
+        );
+        var marker = new google.maps.Marker({
+          map : map,
+          position : mapLatLng
+        });
+      },
+      function(error) {
+        switch(error.code) {
+          case 1:
+            alert("permission denied.");
+            break;
+          case 2:
+            alert("position unavailable.");
+            break;
+          case 3:
+            alert("timeout.");
+            break;
+          default:
+            alert("error(error code:"+error.code+")");
+            break;
+        }
+      }
+    );
+  } else {
+    alert("Location information is not available on this device.");
+  }
+
+}
+
+
+function initMap() {
+  var uluru = {lat: -25.344, lng: 131.036};
+  var map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: uluru});
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+
+
 function executeShuffle(){
 
-  document.getElementById("title").style.display ="none";
-  document.getElementById("describe").style.display ="none";
+  document.getElementById("title").style.display = "none";
+  document.getElementById("describe").style.display = "none";
   document.getElementById("country").style.display = "inline-block";
   document.getElementById("country-ja").style.display = "inline-block";
   document.getElementById("country").innerHTML = "";
@@ -21,6 +77,7 @@ function executeShuffle(){
     document.getElementById("country").innerHTML = output;
 
     var xhr = new XMLHttpRequest();
+    // TODO: need to updated with another way
     xhr.open('GET','https://script.google.com/macros/s/AKfycbw64MMQ9W8oyCPGvDxRvTg4VActbv2ww8XC0wuv62VXMriCVtY/exec?text=' + result + '&source=en&target=ja');
     xhr.send();
     xhr.onreadystatechange = function() {
@@ -72,43 +129,3 @@ function executeShuffle(){
   });
 }
 
-// Search the current location and display it on google map.
-$(function () {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
-        var mapLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        var mapOptions = {
-          zoom : 3,
-          center : mapLatLng
-        };
-        var map = new google.maps.Map(
-          document.getElementById("map"),
-          mapOptions
-        );
-        var marker = new google.maps.Marker({
-          map : map,
-          position : mapLatLng
-        });
-      },
-      function(error) {
-        switch(error.code) {
-          case 1:
-            alert("permission denied.");
-            break;
-          case 2:
-            alert("position unavailable.");
-            break;
-          case 3:
-            alert("timeout.");
-            break;
-          default:
-            alert("error(error code:"+error.code+")");
-            break;
-        }
-      }
-    );
-  } else {
-    alert("Location information is not available on this device.");
-  }
-})

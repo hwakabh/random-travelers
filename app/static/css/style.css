@@ -1,12 +1,51 @@
 html {
   height: 100%;
 }
+
 body {
   height: 100%;
 /*  padding-top: 5rem; */
   background: #ffffff;
   color: gray;
 }
+
+.menu-wrapper {
+  top:3%;
+}
+
+img.bot-icon {
+  width:40px;
+  margin-right:5px;
+  margin-bottom:5px;
+  border-radius: 50%;
+}
+
+.main-card {
+  padding:10px;
+}
+
+h4#title {
+  display:inline-block;
+}
+
+h4.country {
+  color:dodgerblue;
+  display:none;
+}
+
+.user-opt {
+  padding:5px;
+}
+
+.shuffle-button {
+  padding:5px;
+}
+
+button.shuffle {
+  background:dodgerblue;
+  border-color:dodgerblue;
+}
+
 #map {
   width: 100%;
   height: 100%;
