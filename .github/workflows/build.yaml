@@ -36,7 +36,7 @@ jobs:
         with:
           scan-type: 'fs'
           scan-ref: './'
-          trivy-config: .github/config/trivy.yaml
+          trivy-config: .github/configs/trivy.yaml
           # https://github.com/aquasecurity/trivy-action
 
       - name: Install pack
