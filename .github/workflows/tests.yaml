@@ -30,4 +30,4 @@ jobs:
 
       - name: Run pytest
         run:
-          make db && pytest -s --verbosity=3
+          make db && poetry run pytest -s --verbosity=3
