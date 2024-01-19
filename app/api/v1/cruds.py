@@ -1,40 +1,37 @@
 import json
-import urllib.request
 import random
 
+import requests
 
 def get_country():
     # import data
     try:
-        url = 'https://restcountries.com/v3.1/all?fields=region;name'
-        res = urllib.request.urlopen(url)
-        data = json.loads(res.read().decode('utf-8'))
+        url = 'https://restcountries.com/v3.1/all?fields=region,name'
+        data = requests.get(url).json()
 
-        # for x in data:
-            # print(x, file=codecs.open('output.txt', 'a', 'utf-8'))
-
-    except urllib.error.HTTPError as e:
+    except requests.exceptions.HTTPError as e:
         print('HTTPError: ', e)
+
     except json.JSONDecodeError as e:
         print('JSONDecodeError: ', e)
 
     # Select region randomly
     region = []
-    region_list = []
-
     for x in range(0,len(data)):
         if data[x]['region'] != '':
             region.append(data[x]['region'])
 
     region_result = random.choice(list(set(region)))
+    print(f"Region selected: {region_result}")
 
     # Select country randomly
     country = []
-
     for x in range(0,len(data)):
         if data[x]['region'] == region_result:
-            country.append(data[x]['name'])
+            country.append(data[x]['name']['official'])
 
     country_result = random.choice(country)
+    print(f"Country selected: {country_result}")
+
     return country_result
 

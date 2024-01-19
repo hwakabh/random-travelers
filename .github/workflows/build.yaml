@@ -11,6 +11,7 @@ jobs:
   build:
     name: Build image
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,3 +49,23 @@ jobs:
             --env "$(cat .python-version)" \
 
       # - name: Sanity Check with /healthz
+      #   env:
+      #     MYSQL_PASSWORD: root
+      #     MYSQL_DATABASE: rt
+      #     MYSQL_HOST: 127.0.0.1
+      #     MYSQL_USER: root
+      #   run: |
+      #     make db
+      #     docker run -d \
+      #       --name random-travelers \
+      #       -p 8080:8080 \
+      #       -e MYSQL_HOST=${MYSQL_HOST} \
+      #       -e MYSQL_USER=${MYSQL_USER} \
+      #       -e MYSQL_PASSWORD=${MYSQL_PASSWORD} \
+      #       -e MYSQL_DATABASE=${MYSQL_DATABASE} \
+      #       ghcr.io/hwakabh/random-travelers:latest
+      #     sleep 5
+      #     # Need to connect same network as MySQL container
+      #     docker logs random-travelers
+      #     curl -v -s -X GET localhost:8080/healthz ; echo
+
