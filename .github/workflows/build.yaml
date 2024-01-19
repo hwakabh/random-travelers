@@ -57,6 +57,7 @@ jobs:
         run: |
           make db
           docker run -d \
+            --name random-travelers \
             -p 8080:8080 \
             -e MYSQL_HOST=${MYSQL_HOST} \
             -e MYSQL_USER=${MYSQL_USER} \
@@ -64,5 +65,6 @@ jobs:
             -e MYSQL_DATABASE=${MYSQL_DATABASE} \
             ghcr.io/hwakabh/random-travelers:latest
           sleep 5
-          curl -X GET localhost:8080/healthz ; echo
+          docker logs random-travelers
+          curl -v -s -X GET localhost:8080/healthz ; echo
 
