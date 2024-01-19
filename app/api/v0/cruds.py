@@ -1,16 +1,18 @@
 import json
-import mysql.connector as mydb
 import random
-
 from math import sin, cos, acos, radians
+
+import mysql.connector as mydb
 import numpy as np
+
+from app.config import app
 
 
 conn = mydb.connect(
-    host='localhost',
-    user='root',
-    password='root',
-    database='rt',
+    host=app.MYSQL_HOST,
+    user=app.MYSQL_USER,
+    password=app.MYSQL_PASSWORD,
+    database=app.MYSQL_DATABASE,
     charset="utf8"
 )
 
