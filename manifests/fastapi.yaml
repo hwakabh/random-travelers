@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: random-travelers
+  name: fastapi
+  namespace: random-travelers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: random-travelers
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: random-travelers
+    spec:
+      containers:
+      # TODO: need to replace SHA instead of latest tag
+      - image: ghcr.io/hwakabh/random-travelers:latest
+        imagePullPolicy: Always
+        name: fastapi
+        envFrom:
+          - secretRef:
+              name: app-secret
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 60
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: random-travelers
+  name: fastapi
+  namespace: random-travelers
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: random-travelers
+  type: LoadBalancer

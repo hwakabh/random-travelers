@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: random-travelers
+  name: mysql-data
+  namespace: random-travelers
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard-rwo  # GKE option
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: random-travelers
+  name: mysql
+  namespace: random-travelers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: random-travelers
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: random-travelers
+    spec:
+      containers:
+      - name: mysql
+        image: bitnami/mysql:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /opt/bitnami/mysql/data
+          name: mysql-data
+        ports:
+        - name: mysql
+          containerPort: 3306
+        envFrom:
+          - secretRef:
+              name: mysql-secret
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: random-travelers
+  labels:
+    app: random-travelers
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: random-travelers
+  type: ClusterIP
