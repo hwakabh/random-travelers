@@ -54,3 +54,15 @@ Then you can confirm API for health check would be valid, so that application st
 % curl -X GET localhost:3000/healthz; echo
 {"status":"ok"}
 ```
+
+## Environmental Variables of GOOGLE_MAPS_API_KEY
+
+For local:
+```shell
+% export GOOGLE_MAPS_API_KEY='xxx'
+```
+
+In CI pipeline, API key as environmental variables will be fetched from GitHub Action secrets and injected to container build by Cloud Native Buildpacks.
+
+In production env, where we expect to run app on GKE, they are mounted to app with Secret resources.
+But for security consideration, we will use Sealed Secret to hide confidential information from GitHub, so you have to install sealed-secret-controller first to the Kubernetes cluster that you will use need, if you use your BYO cluster.
