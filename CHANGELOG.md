@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.1](https://github.com/hwakabh/random-travelers/compare/v0.2.0...v0.2.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* Query strings for restcounties.com and key to access response. ([0d6fec8](https://github.com/hwakabh/random-travelers/commit/0d6fec8f3530fac4400a47e3ac725561e00a3053))
+
+
+### Documentation
+
+* added descriptions of API key. ([8f06800](https://github.com/hwakabh/random-travelers/commit/8f06800b64597d7d7b326e251addbdcd091b8902))
+
 ## [0.2.0](https://github.com/hwakabh/random-travelers/compare/v0.1.1...v0.2.0) (2024-01-18)
 
 
