@@ -10,6 +10,10 @@ docs:
 - changed-files:
   - any-glob-to-any-file: ['**/*.md']
 
+deployment:
+- changed-files:
+  - any-glob-to-any-file: ['manifests/**/*']
+
 tests:
 - changed-files:
   - any-glob-to-any-file: ['tests/**/*']

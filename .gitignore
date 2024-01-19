@@ -9,9 +9,5 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Django
 *.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-staticfiles
+manifests/secret.yaml
