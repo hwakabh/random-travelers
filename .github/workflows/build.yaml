@@ -7,10 +7,35 @@ on:
       - '!main'
   workflow_dispatch:
 
+env:
+  # For starting up bitnami/mysql
+  MYSQL_PASSWORD: root
+  MYSQL_DATABASE: rt
+  # Additionally for FastAPI container
+  MYSQL_HOST: 127.0.0.1
+  MYSQL_USER: root
+
+
 jobs:
   build:
     name: Build image
     runs-on: ubuntu-latest
+
+    # Required for application startup
+    services:
+      db:
+        image: bitnami/mysql:latest
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,4 +72,15 @@ jobs:
             --path . \
             --env "$(cat .python-version)" \
 
-      # - name: Sanity Check with /healthz
+      - name: Sanity Check with /healthz
+        run: |
+          docker run -d \
+            -p 8080:8080 \
+            -e MYSQL_HOST=${{ env.MYSQL_HOST }} \
+            -e MYSQL_USER=${{ env.MYSQL_USER }} \
+            -e MYSQL_PASSWORD=${{ env.MYSQL_PASSWORD }} \
+            -e MYSQL_DATABASE=${{ env.MYSQL_DATABASE }} \
+            ghcr.io/hwakabh/random-travelers:latest
+          sleep 5
+          curl -X GET localhost:8080/healthz ; echo
+
