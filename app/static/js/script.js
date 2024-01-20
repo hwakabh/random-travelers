@@ -1,4 +1,3 @@
-
 window.onload = async function() {
   const res = await fetch("/api/v1/fetch");
   const src = await res.text();
@@ -78,15 +77,13 @@ function executeShuffle(){
     document.getElementById("country").innerHTML = output;
 
     const xhr = new XMLHttpRequest();
-    const url = '/api/v1/translate'
+    const url = '/api/v1/translate';
 
-    // xhr.open(method, url, async)
     xhr.open('POST', url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify({"country": result}));
 
     xhr.onreadystatechange = function() {
-      // Case if async=false in xhr.open(), we could not evaluate xhr.readyState as conditions
       if (xhr.readyState === 4 && xhr.status === 200) {
         document.getElementById("country-ja").innerHTML = " " + JSON.parse(xhr.responseText);
       }
