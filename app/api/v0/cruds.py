@@ -5,14 +5,14 @@ from math import sin, cos, acos, radians
 import mysql.connector as mydb
 import numpy as np
 
-from app.config import app
+from app.config import config
 
 
 conn = mydb.connect(
-    host=app.MYSQL_HOST,
-    user=app.MYSQL_USER,
-    password=app.MYSQL_PASSWORD,
-    database=app.MYSQL_DATABASE,
+    host=config.MYSQL_HOST,
+    user=config.MYSQL_USER,
+    password=config.MYSQL_PASSWORD,
+    database=config.MYSQL_DATABASE,
     charset="utf8"
 )
 
