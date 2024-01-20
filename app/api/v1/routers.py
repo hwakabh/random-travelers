@@ -4,9 +4,12 @@ import os
 from fastapi import APIRouter, Response
 
 from .cruds import get_country
+from .schemas import TranslateReqBody
+from app.config import config
 
 
 router = APIRouter()
+
 
 @router.get('/')
 def index():
@@ -22,19 +25,37 @@ def get_random_country():
 
 
 @router.get('/fetch')
-def fetch_google_api_key():
+def fetch_google_api_key() -> Response:
 
-    resp = ""
-    GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY', None)
-    if GOOGLE_MAPS_API_KEY is None:
+    API_KEY = config.GOOGLE_MAPS_API_KEY
+    if API_KEY is None:
         # TODO: Implement with raise error for client-side
         print("Failed to load API KEY")
         pass
 
-    url = f'https://maps.googleapis.com/maps/api/js?key={GOOGLE_MAPS_API_KEY}'
+    url = f'https://maps.googleapis.com/maps/api/js?key={API_KEY}'
     resp = requests.get(url).text
 
     return Response(
         content=resp,
         headers={"Content-Type": "text/javascript"},
     )
+
+
+@router.post('/translate')
+def translate(req: TranslateReqBody) -> str:
+
+    API_KEY = config.GOOGLE_MAPS_API_KEY
+    if API_KEY is None:
+        # TODO: Implement with raise error for client-side
+        print("Failed to load API KEY")
+        pass
+
+    text = req.model_dump().get('data')
+    url = f'https://translation.googleapis.com/language/translate/v2?key={API_KEY}&q={text}&source=en&target=ja'
+
+    # Spoofing referer for Cloud Translate API
+    reqbody = requests.post(url, headers={"Referer": "http://localhost:3000/"}).json()
+    resp = reqbody.get('data')
+
+    return resp.get('translations')[0].get('translatedText')

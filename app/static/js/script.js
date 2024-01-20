@@ -58,6 +58,7 @@ function initMap() {
 
 function executeShuffle(){
 
+  // Hide default elements and inject result of random choice
   document.getElementById("title").style.display = "none";
   document.getElementById("describe").style.display = "none";
   document.getElementById("country").style.display = "inline-block";
@@ -73,23 +74,26 @@ function executeShuffle(){
   .done(function(result) {
 
     // Output the result of selecting a country at random.
-    var output = result;
+    const output = result;
     document.getElementById("country").innerHTML = output;
 
-    var xhr = new XMLHttpRequest();
-    // TODO: need to updated with another way
-    xhr.open('GET','https://script.google.com/macros/s/AKfycbw64MMQ9W8oyCPGvDxRvTg4VActbv2ww8XC0wuv62VXMriCVtY/exec?text=' + result + '&source=en&target=ja');
-    xhr.send();
+    const xhr = new XMLHttpRequest();
+    const url = '/api/v1/translate'
+
+    // xhr.open(method, url, async)
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify({"data": result}));
+
     xhr.onreadystatechange = function() {
-      if(xhr.readyState === 4 && xhr.status === 200) {
-        //console.log(xhr.responseText);
-        var data = JSON.parse(xhr.responseText);
-        document.getElementById("country-ja").innerHTML = " " + data.text;
+      // Case if async=false in xhr.open(), we could not evaluate xhr.readyState as conditions
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        document.getElementById("country-ja").innerHTML = " " + JSON.parse(xhr.responseText);
       }
     }
 
     // Display the location of the selected country on a google map.
-    var geocoder = new google.maps.Geocoder();
+    const geocoder = new google.maps.Geocoder();
 
     geocoder.geocode({
       address: result

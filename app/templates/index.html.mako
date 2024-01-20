@@ -30,6 +30,7 @@
               Random travelers will support your trip. You can choose a one-way time limit and travel cost limit.
             </p>
 
+            <!-- Updated by scritp.js -->
             <h4 class="card-title country" id="country"></h4>
             <h4 class="card-title country" id="country-ja"></h4>
 
