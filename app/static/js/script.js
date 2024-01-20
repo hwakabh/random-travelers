@@ -83,7 +83,7 @@ function executeShuffle(){
     // xhr.open(method, url, async)
     xhr.open('POST', url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify({"data": result}));
+    xhr.send(JSON.stringify({"country": result}));
 
     xhr.onreadystatechange = function() {
       // Case if async=false in xhr.open(), we could not evaluate xhr.readyState as conditions

@@ -51,11 +51,10 @@ def translate(req: TranslateReqBody) -> str:
         print("Failed to load API KEY")
         pass
 
-    text = req.model_dump().get('data')
+    text = req.model_dump().get('country')
     url = f'https://translation.googleapis.com/language/translate/v2?key={API_KEY}&q={text}&source=en&target=ja'
 
     # Spoofing referer for Cloud Translate API
-    reqbody = requests.post(url, headers={"Referer": "http://localhost:3000/"}).json()
-    resp = reqbody.get('data')
+    resp = requests.post(url, headers={"Referer": "http://localhost:3000/"}).json()
 
-    return resp.get('translations')[0].get('translatedText')
+    return resp.get('data').get('translations')[0].get('translatedText')
