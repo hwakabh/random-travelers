@@ -12,4 +12,4 @@ class AppSettings(BaseSettings):
     GOOGLE_MAPS_API_KEY: str = ''
 
 
-config = AppSettings()
+app_settings = AppSettings()

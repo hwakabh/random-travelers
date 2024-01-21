@@ -5,7 +5,7 @@ from fastapi import APIRouter, Response
 
 from .cruds import get_country
 from .schemas import TranslateReqBody
-from app.config import config
+from app.config import app_settings
 
 
 router = APIRouter()
@@ -27,7 +27,7 @@ def get_random_country():
 @router.get('/fetch')
 def fetch_google_api_key() -> Response:
 
-    API_KEY = config.GOOGLE_MAPS_API_KEY
+    API_KEY = app_settings.GOOGLE_MAPS_API_KEY
     if API_KEY is None:
         # TODO: Implement with raise error for client-side
         print("Failed to load API KEY")
@@ -45,7 +45,7 @@ def fetch_google_api_key() -> Response:
 @router.post('/translate')
 def translate(req: TranslateReqBody) -> str:
 
-    API_KEY = config.GOOGLE_MAPS_API_KEY
+    API_KEY = app_settings.GOOGLE_MAPS_API_KEY
     if API_KEY is None:
         # TODO: Implement with raise error for client-side
         print("Failed to load API KEY")
