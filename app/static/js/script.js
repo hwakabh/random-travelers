@@ -100,8 +100,7 @@ function executeShuffle(){
       "current_lng":current_lng
     })
   })
-  .done(function(res) {
-    const result = JSON.parse(res);
+  .done(function(result) {
     console.log(result);
 
     //--- display the location of random selected country on a google map.

@@ -44,7 +44,7 @@ def get_destination(req: schemas.SearchRequestBody):
     print('Destination: ')
     print(destination)
 
-    return destination
+    return schemas.SearchResultResponseBody(**destination)
 
 
 # --- search and get near airport from MySQL (airport table)
@@ -78,7 +78,7 @@ def get_near_airport(current_lat,current_lng):
 #--- search and get reachable location (airport and country) from skyscanner api
 #--- exclude if time and travel expenses exceed the user input parameter
 #--- select a country at random
-def get_destination_from_skyscanner_by_random(near_airport_IATA):
+def get_destination_from_skyscanner_by_random(near_airport_IATA) -> dict:
     # --- search and get reachable location (airport and country) from skyscanner api
     # --- exclude if time and travel expenses exceed the user input parameter
 
@@ -123,7 +123,7 @@ def get_destination_from_skyscanner_by_random(near_airport_IATA):
     cur.close()
     conn.close()
 
-    return json.dumps({
+    return {
         "tran_country":transit[0][0],
         "tran_city":transit[0][1],
         "tran_iata":transit[0][2],
@@ -136,4 +136,4 @@ def get_destination_from_skyscanner_by_random(near_airport_IATA):
         "dest_airport":destination[0][3],
         "dest_lat":destination[0][4],
         "dest_lng":destination[0][5]
-    })
+    }
