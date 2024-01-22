@@ -3,26 +3,32 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from mako.template import Template
 
-from .api.v0.routers import router as router_v0
-from .api.v1.routers import router as router_v1
+from app.api.v0.routers import router as router_v0
+from app.api.v1.routers import router as router_v1
+
 
 app = FastAPI(
     title='random-travelers',
     description='API to communicate with backend database',
 )
 
-app.mount(path='/static', app=StaticFiles(directory='./app/static'), name='static')
+app.mount(
+    path='/static',
+    app=StaticFiles(directory='./app/static'),
+    name='static'
+)
+
 
 @app.get('/', response_class=HTMLResponse)
 def root():
     tmpl = Template(filename='./app/templates/index.html.mako')
 
-    ctx = {
+    context = {
       "time": [6, 12, 18, 24],
       "amount": [1000, 2000, 3000, 4000, 5000]
     }
 
-    return tmpl.render(ctx=ctx)
+    return tmpl.render(ctx=context)
 
 
 @app.get('/healthz')

@@ -66,3 +66,24 @@ In CI pipeline, API key as environmental variables will be fetched from GitHub A
 
 In production env, where we expect to run app on GKE, they are mounted to app with Secret resources.
 But for security consideration, we will use Sealed Secret to hide confidential information from GitHub, so you have to install sealed-secret-controller first to the Kubernetes cluster that you will use need, if you use your BYO cluster.
+
+
+## API directory layout
+
+Application root for API: `app/*`
+- `database.py` and `config.py`
+  - The configuration parameters for application
+  - Determine where/how to connect
+
+API Specifics structures in `app/api/v1/*`
+- `routers.py`: Application URL routings with CRUDs and Services
+  - Routers itself is responsible on dispatching, so that it lies on top with CRUDs/Services
+
+- `cruds.py`: Database operations using with models
+  - `models.py`: Table definitions with ORM
+
+- `services.py`: Operations with other services including external endpoints
+
+- `schemas.py`: Contains Request/Response models
+
+- `helpers.py`: Helper functions for CRUDs/Services

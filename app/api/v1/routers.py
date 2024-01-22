@@ -1,61 +1,46 @@
-import requests
-import os
+from fastapi import APIRouter, Depends
+from fastapi.requests import Request
+from fastapi.responses import Response, JSONResponse
+from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Response
-
-from .cruds import get_country
-from .schemas import TranslateReqBody
-from app.config import config
-
+from app.api.v1 import services
+from app.api.v1 import cruds
+from app.api.v1 import schemas
+from app.database import get_db
 
 router = APIRouter()
 
 
 @router.get('/')
-def index():
+def index(req: Request) -> schemas.RootResponse:
     return {
-        "path": "v1 API root, /api/v1/"
+        "path": req.url.path,
+        "detail": "v1 API root"
     }
+
+
+@router.get('/airports')
+def get_airports(db: Session = Depends(get_db)) -> list[schemas.Airport]:
+    return cruds.get_airports_from_db(db=db)
+
+
+@router.get('/search')
+def get_flight_search_result():
+    return cruds.get_destination()
 
 
 @router.post('/shuffle')
 def get_random_country():
-    result = get_country()
-    return result
+    return services.get_random_country()
 
 
 @router.get('/fetch')
-def fetch_google_api_key() -> Response:
-
-    API_KEY = config.GOOGLE_MAPS_API_KEY
-    if API_KEY is None:
-        # TODO: Implement with raise error for client-side
-        print("Failed to load API KEY")
-        pass
-
-    url = f'https://maps.googleapis.com/maps/api/js?key={API_KEY}'
-    resp = requests.get(url).text
-
-    return Response(
-        content=resp,
-        headers={"Content-Type": "text/javascript"},
-    )
+def fetch() -> Response:
+    return services.load_google_map()
 
 
 @router.post('/translate')
-def translate(req: TranslateReqBody) -> str:
-
-    API_KEY = config.GOOGLE_MAPS_API_KEY
-    if API_KEY is None:
-        # TODO: Implement with raise error for client-side
-        print("Failed to load API KEY")
-        pass
-
-    text = req.model_dump().get('data')
-    url = f'https://translation.googleapis.com/language/translate/v2?key={API_KEY}&q={text}&source=en&target=ja'
-
-    # Spoofing referer for Cloud Translate API
-    reqbody = requests.post(url, headers={"Referer": "http://localhost:3000/"}).json()
-    resp = reqbody.get('data')
-
-    return resp.get('translations')[0].get('translatedText')
+def translate(req: schemas.TranslateReqBody) -> str:
+    # Filter only country name to translate
+    country_name = req.model_dump().get('country')
+    return services.translate_county_name(txt=country_name)

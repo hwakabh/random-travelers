@@ -1,7 +1,4 @@
--- user : mysql / pass : Password
--- mysql  Ver 14.14 Distrib 5.7.29, for Linux (x86_64) using  EditLine wrapper
-
-CREATE DATABASE `rt` DEFAULT CHARACTER SET utf8;
+CREATE DATABASE IF NOT EXISTS `rt` DEFAULT CHARACTER SET utf8;
 
 use `rt`;
 
@@ -24,7 +21,7 @@ CREATE TABLE `airport`(
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOAD DATA LOCAL INFILE "/var/www/html/random-travelers/sql/airport.csv" -- your path
+LOAD DATA LOCAL INFILE "./sql/airport.csv"
 INTO TABLE `airport`
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"';
