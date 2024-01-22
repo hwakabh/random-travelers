@@ -1,14 +1,14 @@
 import json
 import random
-from math import sin, cos, acos, radians
 
 import mysql.connector as mydb
 import numpy as np
-import requests
 from sqlalchemy.orm import Session
+import requests
 
 from app.api.v1 import models
 from app.api.v1 import schemas
+from app.api.v1.helpers import dist_on_sphere
 from app.config import app_settings
 
 
@@ -26,37 +26,26 @@ def get_airports_from_db(db: Session) -> schemas.Airport:
     return db.query(models.Airport).limit(5).all()
 
 
-def get_country():
-    # import data
-    try:
-        url = 'https://restcountries.com/v3.1/all?fields=region,name'
-        data = requests.get(url).json()
+def get_destination():
+    #--- get ajax POST data
+    time_limit = requests.json["time_limit"]
+    expense_limit = requests.json["expense_limit"]
+    current_lat = requests.json["current_lat"]
+    current_lng = requests.json["current_lng"]
+    print("main.py ajax POST data - time_limit: " + time_limit)
+    print("main.py ajax POST data - expense_limit: " + expense_limit)
+    print("main.py ajax POST data - current_lat: " + current_lat)
+    print("main.py ajax POST data - current_lng: " + current_lng)
 
-    except requests.exceptions.HTTPError as e:
-        print('HTTPError: ', e)
+    #--- search and get near airport from MySQL (airport table)
+    near_airport_IATA = get_near_airport(current_lat,current_lng)
+    print("main.py get values - near_airport_IATA: " + near_airport_IATA)
 
-    except json.JSONDecodeError as e:
-        print('JSONDecodeError: ', e)
-
-    # Select region randomly
-    region = []
-    for x in range(0,len(data)):
-        if data[x]['region'] != '':
-            region.append(data[x]['region'])
-
-    region_result = random.choice(list(set(region)))
-    print(f"Region selected: {region_result}")
-
-    # Select country randomly
-    country = []
-    for x in range(0,len(data)):
-        if data[x]['region'] == region_result:
-            country.append(data[x]['name']['official'])
-
-    country_result = random.choice(country)
-    print(f"Country selected: {country_result}")
-
-    return country_result
+    #--- search and get reachable location (airport and country) from skyscanner api
+    #--- exclude if time and travel expenses exceed the user input parameter
+    #--- select a country at random
+    destination = get_destination_from_skyscanner_by_random(near_airport_IATA,time_limit,expense_limit)
+    return destination
 
 
 # --- search and get near airport from MySQL (airport table)
@@ -160,16 +149,3 @@ def get_destination_from_skyscanner_by_random(near_airport_IATA,time_limit,expen
         "dest_lat":destination[0][4],
         "dest_lng":destination[0][5]
     })
-
-
-#--- Distance calculation between two points
-earth_rad = 6378.137
-
-def latlng_to_xyz(lat, lng):
-    rlat, rlng = radians(lat), radians(lng)
-    coslat = cos(rlat)
-    return coslat*cos(rlng), coslat*sin(rlng), sin(rlat)
-
-def dist_on_sphere(pos0, pos1, radius=earth_rad):
-    xyz0, xyz1 = latlng_to_xyz(*pos0), latlng_to_xyz(*pos1)
-    return acos(sum(x * y for x, y in zip(xyz0, xyz1)))*radius
