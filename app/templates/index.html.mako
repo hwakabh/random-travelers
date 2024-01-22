@@ -64,7 +64,7 @@
               </div>
             </div>
 
-            <div class="container" id="detail" style="margin-bottom:10px; display:none;">
+            <div class="container" id="detail">
               <div class="accordion" id="detail-ac">
                 <div class="card">
                   <button
@@ -75,7 +75,7 @@
                     data-target="#collapseOne"> Travel Details
                   </button>
                   <div id="collapseOne" class="collapse" data-parent="#detail-ac">
-                    <div class="card-body" style="text-align:left; padding:10px;">
+                    <div class="card-body detailed-card">
                       <ul class="list-group list-group-flush" id="detail-item"></ul>
                     </div>
                   </div>
