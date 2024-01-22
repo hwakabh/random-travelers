@@ -4,7 +4,7 @@ import random
 import mysql.connector as mydb
 import numpy as np
 from sqlalchemy.orm import Session
-import requests
+import httpx
 
 from app.api.v1 import models
 from app.api.v1 import schemas
@@ -28,10 +28,10 @@ def get_airports_from_db(db: Session) -> schemas.Airport:
 
 def get_destination():
     #--- get ajax POST data
-    time_limit = requests.json["time_limit"]
-    expense_limit = requests.json["expense_limit"]
-    current_lat = requests.json["current_lat"]
-    current_lng = requests.json["current_lng"]
+    time_limit = httpx.json()["time_limit"]
+    expense_limit = httpx.json()["expense_limit"]
+    current_lat = httpx.json()["current_lat"]
+    current_lng = httpx.json()["current_lng"]
     print("main.py ajax POST data - time_limit: " + time_limit)
     print("main.py ajax POST data - expense_limit: " + expense_limit)
     print("main.py ajax POST data - current_lat: " + current_lat)

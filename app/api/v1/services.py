@@ -1,8 +1,8 @@
 import json
 import random
-import requests
 
 from fastapi.responses import Response
+import httpx
 
 from app.config import app_settings
 from app.api.v1.schemas import TranslateReqBody
@@ -17,7 +17,7 @@ def load_google_map() -> Response:
         pass
 
     url = f'https://maps.googleapis.com/maps/api/js?key={API_KEY}'
-    resp = requests.get(url).text
+    resp = httpx.get(url).text
 
     return Response(
         content=resp,
@@ -36,7 +36,7 @@ def translate_county_name(txt: TranslateReqBody) -> str:
     url = f'https://translation.googleapis.com/language/translate/v2?key={API_KEY}&q={txt}&source=en&target=ja'
 
     # Spoofing referer for Cloud Translate API
-    resp = requests.post(url, headers={"Referer": "http://localhost:3000/"}).json()
+    resp = httpx.post(url, headers={"Referer": "http://localhost:3000/"}).json()
 
     return resp.get('data').get('translations')[0].get('translatedText')
 
@@ -45,9 +45,9 @@ def get_random_country():
     # import data
     try:
         url = 'https://restcountries.com/v3.1/all?fields=region,name'
-        data = requests.get(url).json()
+        data = httpx.get(url).json()
 
-    except requests.exceptions.HTTPError as e:
+    except httpx.HTTPError as e:
         print('HTTPError: ', e)
 
     except json.JSONDecodeError as e:

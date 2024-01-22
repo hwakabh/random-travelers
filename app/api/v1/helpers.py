@@ -1,5 +1,6 @@
 from math import sin, cos, acos, radians
 
+
 # Helper functions for cruds.py
 #--- Distance calculation between two points
 EARTH_RAD = 6378.137
