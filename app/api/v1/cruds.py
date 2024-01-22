@@ -4,9 +4,8 @@ import random
 import mysql.connector as mydb
 import numpy as np
 from sqlalchemy.orm import Session
-import httpx
 
-from app.api.v1 import models
+# from app.api.v1 import models
 from app.api.v1 import schemas
 from app.api.v1.helpers import dist_on_sphere
 from app.config import app_settings
@@ -22,29 +21,29 @@ conn = mydb.connect(
 )
 
 
-def get_airports_from_db(db: Session) -> schemas.Airport:
-    return db.query(models.Airport).limit(5).all()
+# def get_airports_from_db(db: Session) -> schemas.Airport:
+#     return db.query(models.Airport).limit(5).all()
 
 
-def get_destination():
+# Bind cruds functions for return results to router
+def get_destination(req: schemas.SearchRequestBody):
     #--- get ajax POST data
-    time_limit = httpx.json()["time_limit"]
-    expense_limit = httpx.json()["expense_limit"]
-    current_lat = httpx.json()["current_lat"]
-    current_lng = httpx.json()["current_lng"]
-    print("main.py ajax POST data - time_limit: " + time_limit)
-    print("main.py ajax POST data - expense_limit: " + expense_limit)
-    print("main.py ajax POST data - current_lat: " + current_lat)
-    print("main.py ajax POST data - current_lng: " + current_lng)
+    print(f'User conditions: {req}')
 
     #--- search and get near airport from MySQL (airport table)
-    near_airport_IATA = get_near_airport(current_lat,current_lng)
-    print("main.py get values - near_airport_IATA: " + near_airport_IATA)
+    near_airport_IATA = get_near_airport(
+        current_lat=req.current_lat,
+        current_lng=req.current_lng
+    )
+    print("near_airport_IATA: " + near_airport_IATA)
 
     #--- search and get reachable location (airport and country) from skyscanner api
     #--- exclude if time and travel expenses exceed the user input parameter
     #--- select a country at random
-    destination = get_destination_from_skyscanner_by_random(near_airport_IATA,time_limit,expense_limit)
+    destination = get_destination_from_skyscanner_by_random(near_airport_IATA)
+    print('Destination: ')
+    print(destination)
+
     return destination
 
 
@@ -53,9 +52,6 @@ def get_near_airport(current_lat,current_lng):
 
     conn.ping(reconnect=True)
     cur = conn.cursor()
-
-    print("gacha.py get values - current_lat: " + current_lat)
-    print("gacha.py get values - current_lng: " + current_lng)
 
     current = float(current_lat), float(current_lng)
     target = []
@@ -75,9 +71,6 @@ def get_near_airport(current_lat,current_lng):
     cur.close()
     conn.close()
 
-    #print(dist_result)
-    #print(search_key)
-
     #--- return near airport IATA
     return dist_result[np.argmin(search_key)][2]
 
@@ -85,12 +78,7 @@ def get_near_airport(current_lat,current_lng):
 #--- search and get reachable location (airport and country) from skyscanner api
 #--- exclude if time and travel expenses exceed the user input parameter
 #--- select a country at random
-def get_destination_from_skyscanner_by_random(near_airport_IATA,time_limit,expense_limit):
-
-    print("gacha.py get values - near_airport_IATA: " + near_airport_IATA)
-    print("gacha.py get values - time_limit: " + time_limit)
-    print("gacha.py get values - expense_limit: " + expense_limit)
-
+def get_destination_from_skyscanner_by_random(near_airport_IATA):
     # --- search and get reachable location (airport and country) from skyscanner api
     # --- exclude if time and travel expenses exceed the user input parameter
 

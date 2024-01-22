@@ -23,3 +23,10 @@ class Airport(AirportBase):
 
     class Config:
         orm_mode = True
+
+
+class SearchRequestBody(BaseModel):
+    time_limit: int
+    expense_limit: int
+    current_lat: float
+    current_lng: float

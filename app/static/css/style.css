@@ -33,6 +33,15 @@ h4.country {
   display:none;
 }
 
+p#city {
+  color:dodgerblue;
+  display:none;
+}
+
+p#search {
+  display:none;
+}
+
 .user-opt {
   padding:5px;
 }

@@ -41,8 +41,7 @@ def translate_county_name(txt: TranslateReqBody) -> str:
     return resp.get('data').get('translations')[0].get('translatedText')
 
 
-def get_random_country():
-    # import data
+def get_random_country() -> str:
     try:
         url = 'https://restcountries.com/v3.1/all?fields=region,name'
         data = httpx.get(url).json()
@@ -60,7 +59,6 @@ def get_random_country():
             region.append(data[x]['region'])
 
     region_result = random.choice(list(set(region)))
-    print(f"Region selected: {region_result}")
 
     # Select country randomly
     country = []
@@ -69,6 +67,5 @@ def get_random_country():
             country.append(data[x]['name']['official'])
 
     country_result = random.choice(country)
-    print(f"Country selected: {country_result}")
 
     return country_result
