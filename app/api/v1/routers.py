@@ -1,21 +1,27 @@
 import requests
 import os
 
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, Depends
+from sqlalchemy.orm import Session
 
-from .cruds import get_country
-from .schemas import TranslateReqBody
+from app.api.v1.cruds import get_country, get_airports_from_db
+from app.api.v1.schemas import TranslateReqBody, Airport
 from app.config import app_settings
-
+from app.database import get_db
 
 router = APIRouter()
 
 
 @router.get('/')
-def index():
+def index() -> dict:
     return {
         "path": "v1 API root, /api/v1/"
     }
+
+
+@router.get('/airports')
+def get_airports(db: Session = Depends(get_db)) -> list[Airport]:
+    return get_airports_from_db(db=db)
 
 
 @router.post('/shuffle')

@@ -2,6 +2,15 @@ import json
 import random
 
 import requests
+from sqlalchemy.orm import Session
+
+from app.api.v1 import models
+from app.api.v1 import schemas
+
+
+def get_airports_from_db(db: Session) -> schemas.Airport:
+    return db.query(models.Airport).limit(5).all()
+
 
 def get_country():
     # import data
