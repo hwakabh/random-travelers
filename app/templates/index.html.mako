@@ -33,7 +33,8 @@
             <!-- Updated by scritp.js -->
             <h4 class="card-title country" id="country"></h4>
             <h4 class="card-title country" id="country-ja"></h4>
-
+            <p class="card-text" id="city"></p>
+            <p class="card-text" id="search"></p>
 
             <div class="container">
               <div class="row">
@@ -55,9 +56,33 @@
                 </div>
                 <div class="col-xs-8 shuffle-button">
                   <button type="button" class="btn btn-primary shuffle" onclick="executeShuffle()">Go!</button>
+                  <button id="load" class="btn btn-primary d-none" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Search...
+                  </button>
                 </div>
               </div>
             </div>
+
+            <div class="container" id="detail">
+              <div class="accordion" id="detail-ac">
+                <div class="card">
+                  <button
+                    class="btn btn-link"
+                    id="detail-hd"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"> Travel Details
+                  </button>
+                  <div id="collapseOne" class="collapse" data-parent="#detail-ac">
+                    <div class="card-body detailed-card">
+                      <ul class="list-group list-group-flush" id="detail-item"></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           </div>
         </div>

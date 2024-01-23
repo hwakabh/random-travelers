@@ -10,13 +10,13 @@ body {
 }
 
 .menu-wrapper {
-  top:3%;
+  top: 3%;
 }
 
 img.bot-icon {
-  width:40px;
-  margin-right:5px;
-  margin-bottom:5px;
+  width: 40px;
+  margin-right: 5px;
+  margin-bottom: 5px;
   border-radius: 50%;
 }
 
@@ -33,12 +33,31 @@ h4.country {
   display:none;
 }
 
+p#city {
+  color:dodgerblue;
+  display:none;
+}
+
+p#search {
+  display:none;
+}
+
+#detail {
+  margin-bottom: 10px;
+  display:none;
+}
+
+.detailed-card {
+  text-align: left;
+  padding: 10px;
+}
+
 .user-opt {
-  padding:5px;
+  padding: 5px;
 }
 
 .shuffle-button {
-  padding:5px;
+  padding: 5px;
 }
 
 button.shuffle {

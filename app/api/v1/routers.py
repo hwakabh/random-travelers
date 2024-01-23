@@ -6,37 +6,37 @@ from sqlalchemy.orm import Session
 from app.api.v1 import services
 from app.api.v1 import cruds
 from app.api.v1 import schemas
-from app.database import get_db
+from app.api.v1 import models
+from app.database import get_db, engine
 
 router = APIRouter()
+# Create table if not exists
+models.Base.metadata.create_all(bind=engine)
 
 
 @router.get('/')
 def index(req: Request) -> schemas.RootResponse:
-    return {
+    return JSONResponse(content={
         "path": req.url.path,
         "detail": "v1 API root"
-    }
-
-
-@router.get('/airports')
-def get_airports(db: Session = Depends(get_db)) -> list[schemas.Airport]:
-    return cruds.get_airports_from_db(db=db)
-
-
-@router.get('/search')
-def get_flight_search_result():
-    return cruds.get_destination()
-
-
-@router.post('/shuffle')
-def get_random_country():
-    return services.get_random_country()
+    })
 
 
 @router.get('/fetch')
 def fetch() -> Response:
     return services.load_google_map()
+
+
+@router.post('/shuffle')
+def get_random_country(
+    payload: schemas.SearchRequestBody,
+    db: Session = Depends(get_db)
+) -> schemas.SearchResultResponseBody:
+
+    country = services.get_random_country()
+    print(f'Randomly selected country: {country}')
+
+    return cruds.get_destination(db=db, req=payload)
 
 
 @router.post('/translate')
