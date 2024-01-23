@@ -14,6 +14,10 @@ class TranslateReqBody(BaseModel):
     country: str
 
 
+class TranslateRespBody(BaseModel):
+    translated: str
+
+
 class SearchRequestBody(BaseModel):
     time_limit: int
     expense_limit: int

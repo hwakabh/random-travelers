@@ -10,7 +10,7 @@ from app.api.v1 import models
 from app.database import get_db, engine
 
 router = APIRouter()
-# Create table if not exists
+# Create table if not exists on application startup
 models.Base.metadata.create_all(bind=engine)
 
 
@@ -40,7 +40,10 @@ def get_random_country(
 
 
 @router.post('/translate')
-def translate(req: schemas.TranslateReqBody) -> str:
+def translate(req: schemas.TranslateReqBody) -> schemas.TranslateRespBody:
     # Filter only country name to translate
     country_name = req.model_dump().get('country')
-    return services.translate_county_name(txt=country_name)
+
+    return schemas.TranslateRespBody(
+        translated=services.translate_county_name(txt=country_name)
+    )

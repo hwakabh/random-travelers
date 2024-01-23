@@ -6,7 +6,7 @@ from app.database import Base
 class Airport(Base):
     __tablename__ = 'airport'
 
-    id: int = Column(Integer, primary_key=True)
+    id: int = Column(Integer, primary_key=True, autoincrement=True)
     name: str = Column(String(74))
     city: str = Column(String(35))
     country: str = Column(String(34))
