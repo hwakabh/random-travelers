@@ -9,12 +9,12 @@ from app.api.v1.helpers import dist_on_sphere
 
 
 # Bind cruds functions for return results to router
-def get_destination(db: Session, req: schemas.SearchRequestBody):
+def get_destination(db: Session, req: schemas.SearchRequestBody) -> schemas.SearchResultResponseBody:
     #--- get ajax POST data
     print(f'User conditions: {req}')
 
     #--- search and get near airport from MySQL (airport table)
-    near_airport_IATA = get_near_airport(
+    near_airport_IATA = get_nearest_airport_name_from_db(
         db=db,
         lat=req.current_lat,
         lng=req.current_lng
@@ -24,7 +24,7 @@ def get_destination(db: Session, req: schemas.SearchRequestBody):
     #--- search and get reachable location (airport and country) from skyscanner api
     #--- exclude if time and travel expenses exceed the user input parameter
     #--- select a country at random
-    destination = get_destination_from_skyscanner_by_random(
+    destination = get_destination_from_skyscanner_by_random_from_db(
         db=db,
         iata=near_airport_IATA
     )
@@ -35,7 +35,7 @@ def get_destination(db: Session, req: schemas.SearchRequestBody):
 
 
 # --- search and get near airport from MySQL (airport table)
-def get_near_airport(db: Session, lat: float, lng: float) -> str:
+def get_nearest_airport_name_from_db(db: Session, lat: float, lng: float) -> str:
     target = []
     dist_result = []
     search_key = []
@@ -70,7 +70,7 @@ def get_near_airport(db: Session, lat: float, lng: float) -> str:
 #--- search and get reachable location (airport and country) from skyscanner api
 #--- exclude if time and travel expenses exceed the user input parameter
 #--- select a country at random
-def get_destination_from_skyscanner_by_random(db: Session, iata: str) -> dict:
+def get_destination_from_skyscanner_by_random_from_db(db: Session, iata: str) -> dict:
     # --- search and get reachable location (airport and country) from skyscanner api
     # --- exclude if time and travel expenses exceed the user input parameter
 

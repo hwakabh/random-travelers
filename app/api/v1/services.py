@@ -5,7 +5,6 @@ from fastapi.responses import Response
 import httpx
 
 from app.config import app_settings
-from app.api.v1.schemas import TranslateReqBody
 
 
 def load_google_map() -> Response:
@@ -25,7 +24,7 @@ def load_google_map() -> Response:
     )
 
 
-def translate_county_name(txt: TranslateReqBody) -> str:
+def translate_county_name(txt: str) -> str:
 
     API_KEY = app_settings.GOOGLE_MAPS_API_KEY
     if API_KEY is None:

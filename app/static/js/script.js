@@ -181,9 +181,9 @@ function executeShuffle(){
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        const countryTranslated = JSON.parse(xhr.responseText);
+        const resp = JSON.parse(xhr.responseText);
         document.getElementById("country-ja").style.display = "inline-block";
-        document.getElementById("country-ja").innerHTML = ' ' + countryTranslated;
+        document.getElementById("country-ja").innerHTML = ' ' + resp.translated;
       }
     }
   })
