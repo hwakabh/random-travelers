@@ -52,20 +52,11 @@ def get_random_country() -> str:
     except json.JSONDecodeError as e:
         print('JSONDecodeError: ', e)
 
-    # Select region randomly
-    region = []
-    for x in range(0,len(data)):
-        if data[x]['region'] != '':
-            region.append(data[x]['region'])
-
-    region_result = random.choice(list(set(region)))
+    # Fetch regions list with removing duplication
+    regions = sorted(set([country.get('region') for country in data]))
+    region = random.choice(regions)
 
     # Select country randomly
-    country = []
-    for x in range(0,len(data)):
-        if data[x]['region'] == region_result:
-            country.append(data[x]['name']['official'])
+    countries = [c.get('name').get('official') for c in data if c.get('region') == region]
 
-    country_result = random.choice(country)
-
-    return country_result
+    return random.choice(countries)
