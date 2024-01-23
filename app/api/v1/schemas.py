@@ -14,17 +14,6 @@ class TranslateReqBody(BaseModel):
     country: str
 
 
-class AirportBase(BaseModel):
-    pass
-
-
-class Airport(AirportBase):
-    id: int
-
-    class Config:
-        orm_mode = True
-
-
 class SearchRequestBody(BaseModel):
     time_limit: int
     expense_limit: int
@@ -45,6 +34,28 @@ class SearchResultResponseBody(BaseModel):
     tran_airport: str
     tran_lat: float
     tran_lng: float
+
+
+# Database Model
+class AirportBase(BaseModel):
+    pass
+
+
+class Airport(AirportBase):
+    id: int
+    name: str
+    city: str
+    country: str
+    IATA: str
+    ICAO: str
+    latitude: float
+    longitude: float
+    altitude: int
+    tz_offset: float
+    DST: str
+    tz_dbtime: str
+    types: str
+    datasource: str
 
     class Config:
         orm_mode = True
