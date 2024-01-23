@@ -10,7 +10,7 @@ from app.api.v1 import models
 from app.database import get_db, engine
 
 router = APIRouter()
-# Create table if not exists
+# Create table if not exists on application startup
 models.Base.metadata.create_all(bind=engine)
 
 
