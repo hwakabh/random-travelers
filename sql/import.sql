@@ -2,22 +2,21 @@ CREATE DATABASE IF NOT EXISTS `rt` DEFAULT CHARACTER SET utf8;
 
 use `rt`;
 
-CREATE TABLE `airport`(
+CREATE TABLE IF NOT EXISTS `airport`(
     `id` int AUTO_INCREMENT,
-    `Name` varchar(74) DEFAULT NULL,
-    `City` varchar(35) DEFAULT NULL,
-    `Country` varchar(34) DEFAULT NULL,
+    `name` varchar(74) DEFAULT NULL,
+    `city` varchar(35) DEFAULT NULL,
+    `country` varchar(34) DEFAULT NULL,
     `IATA` varchar(16) DEFAULT NULL,
     `ICAO` varchar(6) DEFAULT NULL,
-    `Latitude` double(9,6) DEFAULT NULL,
-    `Longitude` double(9,6) DEFAULT NULL,
-    `Altitude` varchar(19) DEFAULT NULL,
-    `Timezone` varchar(5) DEFAULT NULL,
+    `latitude` double(9,6) DEFAULT NULL,
+    `longitude` double(9,6) DEFAULT NULL,
+    `altitude` varchar(19) DEFAULT NULL,
+    `tz_offset` varchar(5) DEFAULT NULL,
     `DST` varchar(3) DEFAULT NULL,
-    `Tz database time` varchar(32) DEFAULT NULL,
-    `zone` varchar(21) DEFAULT NULL,
-    `Type` varchar(13) DEFAULT NULL,
-    `Source` varchar(13) DEFAULT NULL,
+    `tz_dbtime` varchar(32) DEFAULT NULL,
+    `types` varchar(13) DEFAULT NULL,
+    `datasource` varchar(13) DEFAULT NULL,
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
