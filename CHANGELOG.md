@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.0](https://github.com/hwakabh/random-travelers/compare/v0.2.1...v0.3.0) (2024-01-23)
+
+
+### Features
+
+* added model/schema/crud for base for Airport instances. ([2530485](https://github.com/hwakabh/random-travelers/commit/2530485438624c46ff9594bca38e50ba65d612d0))
+* added schemas for v0 API: [#66](https://github.com/hwakabh/random-travelers/issues/66). ([fefedc3](https://github.com/hwakabh/random-travelers/commit/fefedc3a423a4cbb090500ed0f0a613319bfe811))
+* enabled to fetch URL path dynamically for v0 API. ([1e10540](https://github.com/hwakabh/random-travelers/commit/1e10540be102a0c2b42867ab473e6ecb76f9a80c))
+
+
+### Bug Fixes
+
+* **seeds:** updated SQL for generic uses. ([ae8a3d6](https://github.com/hwakabh/random-travelers/commit/ae8a3d63f5768f2bdf869943271188dce48b69ac))
+
+
+### Documentation
+
+* updated notes for directory structures. ([4c65538](https://github.com/hwakabh/random-travelers/commit/4c655384f9a2509bd7949a1776fe3b2f0384b509))
+
 ## [0.2.1](https://github.com/hwakabh/random-travelers/compare/v0.2.0...v0.2.1) (2024-01-19)
 
 
