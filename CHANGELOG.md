@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/hwakabh/random-travelers/compare/v0.3.0...v0.4.0) (2024-02-19)
+
+
+### Features
+
+* **ci:** added cleanup workflow for staled images. ([892adc6](https://github.com/hwakabh/random-travelers/commit/892adc65bb50eeb6fc120d36bdab5dbac9014901))
+* **ci:** added semantic PR. ([b8f73c9](https://github.com/hwakabh/random-travelers/commit/b8f73c9734897e205c76233e2f145082b529085a))
+
 ## [0.3.0](https://github.com/hwakabh/random-travelers/compare/v0.2.1...v0.3.0) (2024-01-23)
 
 
