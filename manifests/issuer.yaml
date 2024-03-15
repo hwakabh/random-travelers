@@ -1,0 +1,17 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt
+  namespace: random-travelers
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: 'hrykwkbys1024@gmail.com'
+    # cert-manager automatically generate secret
+    privateKeySecretRef:
+      name: ca-letsencrypt
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
