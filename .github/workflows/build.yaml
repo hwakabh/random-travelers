@@ -38,7 +38,7 @@ jobs:
           # https://github.com/aquasecurity/trivy-action
 
       - name: Install pack
-        uses: buildpacks/github-actions/setup-pack@v5.5.4
+        uses: buildpacks/github-actions/setup-pack@v5.6.0
         # https://github.com/buildpacks/github-actions#setup-pack-cli-action
 
       - name: Build image locally
