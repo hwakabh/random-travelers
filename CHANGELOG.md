@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/hwakabh/random-travelers/compare/v0.4.0...v0.4.1) (2024-07-08)
+
+
+### Dependencies
+
+* **certifi:** bumped to 2024.07.04 for fixing Trivy CVE scan. ([5ef9f9f](https://github.com/hwakabh/random-travelers/commit/5ef9f9fcb03d8702251cd3f8b2e78d3b75717967))
+
 ## [0.4.0](https://github.com/hwakabh/random-travelers/compare/v0.3.0...v0.4.0) (2024-02-19)
 
 
