@@ -30,7 +30,7 @@ jobs:
           poetry export -o requirements.txt --without-hashes
 
       - name: Install pack
-        uses: buildpacks/github-actions/setup-pack@v5.7.4
+        uses: buildpacks/github-actions/setup-pack@v5.8.3
         # https://github.com/buildpacks/github-actions#setup-pack-cli-action
 
       - name: Publish packages
