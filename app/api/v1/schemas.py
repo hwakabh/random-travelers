@@ -61,4 +61,6 @@ class Airport(AirportBase):
     types: str
     datasource: str
 
-    model_config = ConfigDict()
+    model_config = ConfigDict(
+      from_attributes=True
+    )
