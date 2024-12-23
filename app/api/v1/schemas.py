@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class RootResponseBase(BaseModel):
@@ -61,5 +61,6 @@ class Airport(AirportBase):
     types: str
     datasource: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(
+      from_attributes=True
+    )
