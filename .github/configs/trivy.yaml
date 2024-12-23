@@ -4,8 +4,9 @@ time-out: 1m
 severity:
   - CRITICAL
   - HIGH
-vulnerability:
-  type:
+pkg:
+  types:
     - os
     - library
+vulnerability:
   ignore-unfixed: false
