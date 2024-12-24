@@ -16,19 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: '.python-version'
-
-      # Note that poerty command will be used only for exporting deps in this workflow
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-
-      - name: Generate requirements.txt for Google Cloud buildpacks
-        run: |
-          poetry export -o requirements.txt --without-hashes
-
       - name: Security Test of Trivy with filesystem-mode
         uses: aquasecurity/trivy-action@master
         with:
@@ -36,11 +23,6 @@ jobs:
           scan-ref: './'
           trivy-config: .github/configs/trivy.yaml
           # https://github.com/aquasecurity/trivy-action
-
-      # - name: Install nixpacks CLI and build image
-      #   run: |
-      #     curl -sSL https://nixpacks.com/install.sh | bash
-      #     nixpacks build . --name random-travelers:local
 
       - name: Login to GHCR
         uses: docker/login-action@v3
