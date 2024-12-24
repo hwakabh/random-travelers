@@ -4,6 +4,8 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 MYSQL_CONTAINER_NAME := "rt-mysql"
+MYSQL_ROOT_PASSWORD := "root"
+MYSQL_DATABASE := "rt"
 
 # all targets are phony
 .PHONY: $(shell egrep -o ^[a-zA-Z_-]+: $(MAKEFILE_LIST) | sed 's/://')
@@ -26,8 +28,8 @@ db: --check-docker ## Starting MySQL container
 	@docker start ${MYSQL_CONTAINER_NAME} 2> /dev/null || docker run -d \
 		--name ${MYSQL_CONTAINER_NAME} \
 		-p 3306:3306 \
-		-e MYSQL_DATABASE='rt' \
-		-e MYSQL_ROOT_PASSWORD='root' \
+		-e MYSQL_DATABASE=${MYSQL_DATABASE} \
+		-e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
 		--health-cmd "mysqladmin ping --user=root --password=root" \
 		--health-interval 10s \
 		--health-retries 5 \
