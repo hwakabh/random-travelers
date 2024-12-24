@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.5.0](https://github.com/hwakabh/random-travelers/compare/v0.4.1...v0.5.0) (2024-12-24)
+
+
+### Features
+
+* **build:** added Nixpacks configurations. ([e810f8f](https://github.com/hwakabh/random-travelers/commit/e810f8fa86ec8e870a5095abc5f114da02ca3b6a))
+* **ci:** enabled pushing image to GHCR. ([7180018](https://github.com/hwakabh/random-travelers/commit/7180018f1d4d6e1cb4d61bfdbe92fb0715249acb))
+* **ci:** implemented actions of nixpacks. ([51c2021](https://github.com/hwakabh/random-travelers/commit/51c20214ffaf27ebb355907c8cf0c9eff1cabde5))
+* enabled to create database for first migration. ([33aec3d](https://github.com/hwakabh/random-travelers/commit/33aec3da0a6be164bd63be4ee617553e306641cf))
+
+
+### Bug Fixes
+
+* **build:** default parameters in Makefile. ([0582a19](https://github.com/hwakabh/random-travelers/commit/0582a193240128be6d59c01e78f400c7d434c9fb))
+
+
+### Dependencies
+
+* locked minimal Python version with 3.13.0. ([64e4fab](https://github.com/hwakabh/random-travelers/commit/64e4fab7c152ee11536b10da011106412352ee11))
+
 ## [0.4.1](https://github.com/hwakabh/random-travelers/compare/v0.4.0...v0.4.1) (2024-07-08)
 
 
