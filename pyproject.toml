@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "random-travelers"
-version = "0.4.1"
+version = "0.5.0"
 description = "People who make thier decisions decided by Cloud Native"
 authors = ["Your Name <you@example.com>"]
 license = "MIT"
