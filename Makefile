@@ -4,8 +4,8 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 MYSQL_CONTAINER_NAME := "rt-mysql"
-MYSQL_ROOT_PASSWORD := "rt"
-MYSQL_DATABASE := "root"
+MYSQL_ROOT_PASSWORD := "root"
+MYSQL_DATABASE := "rt"
 
 # all targets are phony
 .PHONY: $(shell egrep -o ^[a-zA-Z_-]+: $(MAKEFILE_LIST) | sed 's/://')
