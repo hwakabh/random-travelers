@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
+
 jobs:
   build_and_ship:
     name: Build & Ship OCI image
@@ -22,21 +25,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         # https://github.com/docker/login-action#github-container-registry
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-
-      - name: Generate requirements.txt for Google Cloud buildpacks
-        run: |
-          poetry export -o requirements.txt --without-hashes
-
-      - name: Install pack
-        uses: buildpacks/github-actions/setup-pack@v5.8.3
-        # https://github.com/buildpacks/github-actions#setup-pack-cli-action
-
-      - name: Publish packages
-        run: |
-          pack build ghcr.io/hwakabh/random-travelers:latest \
-            --builder gcr.io/buildpacks/builder:latest \
-            --path . \
-            --env "$(cat .python-version)" \
-            --publish
+      - name: Build and push Docker images
+        uses: iloveitaly/github-action-nixpacks@main
+        with:
+          push: true
+          tags: ${{ env.IMAGE_NAME }}:latest
