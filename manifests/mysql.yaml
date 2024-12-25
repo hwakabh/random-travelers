@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: random-travelers
+    tier: db
+  name: mysql
+  namespace: random-travelers
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: random-travelers
+      tier: db
+  serviceName: mysql
+  template:
+    metadata:
+      labels:
+        app: random-travelers
+        tier: db
+    spec:
+      containers:
+      - name: mysql
+        image: bitnami/mysql:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /opt/bitnami/mysql/data
+          name: mysql-data
+        ports:
+        - name: mysql
+          containerPort: 3306
+        envFrom:
+        - secretRef:
+            name: mysql-secret
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data
+      namespace: random-travelers
+      labels:
+        app: random-travelers
+        tier: db
+    spec:
+      # kind's default storageClass
+      storageClassName: standard
+      accessModes:
+      - ReadWriteOnce
+      volumeMode: Filesystem
+      resources:
+        requests:
+          storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: random-travelers
+  labels:
+    app: random-travelers
+    tier: db
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: random-travelers
+    tier: db
+  clusterIP: None

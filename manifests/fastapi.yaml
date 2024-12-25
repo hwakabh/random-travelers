@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app: random-travelers
+    tier: app
   name: fastapi
   namespace: random-travelers
 spec:
@@ -11,11 +12,13 @@ spec:
   selector:
     matchLabels:
       app: random-travelers
+      tier: app
   strategy: {}
   template:
     metadata:
       labels:
         app: random-travelers
+        tier: app
     spec:
       containers:
       # TODO: need to replace SHA instead of latest tag
@@ -40,6 +43,7 @@ kind: Service
 metadata:
   labels:
     app: random-travelers
+    tier: app
   name: fastapi
   namespace: random-travelers
 spec:
@@ -49,4 +53,5 @@ spec:
     targetPort: 8080
   selector:
     app: random-travelers
+    tier: app
   type: ClusterIP
