@@ -80,8 +80,24 @@ You can create all Kubernetes resources from manifests in this repository, after
 # Install sealed-secret-controllers
 % kubectl apply -f ./manifests/controllers/sealed-secret-controller.yaml
 
-# Install application resources
-% kubectl apply -f ./manifests
+# Install application resources with Kustomization
+% kubectl apply -k ./manifests
+
+# Required for sealed-secret-controller to unseal SealedSecret resources
+% cat << EOF |kubeseal - -o yaml |kubectl apply -f -
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: random-travelers
+  labels:
+    app: random-travelers
+type: Opaque
+data:
+  MYSQL_ROOT_PASSWORD: $(echo -n root |base64)
+  MYSQL_DATABASE: $(echo -n rt |base64)
+EOF
 ```
 
 ## Environmental Variables of GOOGLE_MAPS_API_KEY
@@ -101,18 +117,58 @@ For updating each environmental variables to be sealed, you need to install `kub
 apiVersion: v1
 kind: Secret
 metadata:
-  name: mysql-secret
+  name: app-secret
   namespace: random-travelers
   labels:
     app: random-travelers
 type: Opaque
 data:
-  MYSQL_HOST: $(echo -n YOUR_VALUE |base64)
-  MYSQL_USER: $(echo -n YOUR_VALUE |base64)
-  MYSQL_PASSWORD: $(echo -n YOUR_VALUE |base64)
-  MYSQL_DATABASE: $(echo -n YOUR_VALUE |base64)
-  GOOGLE_MAPS_API_KEY: $(echo -n YOUR_VALUE |base64)
+  MYSQL_HOST: $(echo -n mysql.random-travelers.svc.cluster.local |base64)
+  MYSQL_USER: $(echo -n root |base64)
+  MYSQL_PASSWORD: $(echo -n root |base64)
+  MYSQL_DATABASE: $(echo -n rt |base64)
+  GOOGLE_MAPS_API_KEY: $(echo -n $GOOGLE_MAPS_API_KEY |base64)
 EOF
+```
+
+Once you can complete all required setup, you can see the following resources:
+
+```shell
+# main resources on kind-cluster
+% kubectl -n random-travelers get pods,deploy,sts,pvc,secrets,sealedsecrets
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/fastapi-6b9cd8d559-2gmsj   1/1     Running   0          22m
+pod/mysql-0                    1/1     Running   0          26m
+pod/mysql-1                    1/1     Running   0          25m
+pod/mysql-2                    1/1     Running   0          23m
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/fastapi   1/1     1            1           26m
+
+NAME                     READY   AGE
+statefulset.apps/mysql   3/3     26m
+
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/fastapi   ClusterIP   10.96.236.238   <none>        80/TCP     28m
+service/mysql     ClusterIP   None            <none>        3306/TCP   28m
+
+NAME                                       STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/mysql-data-mysql-0   Bound    pvc-f12a317b-e0ad-4613-ada3-ed1314a55313   5Gi        RWO            standard       <unset>                 26m
+persistentvolumeclaim/mysql-data-mysql-1   Bound    pvc-f0607751-c65a-44c3-a1d3-f5b79fe812b7   5Gi        RWO            standard       <unset>                 25m
+persistentvolumeclaim/mysql-data-mysql-2   Bound    pvc-57e2cc12-6c5f-4c82-82a8-cc0acd3b4bcf   5Gi        RWO            standard       <unset>                 23m
+
+NAME                  TYPE     DATA   AGE
+secret/app-secret     Opaque   5      24m
+secret/mysql-secret   Opaque   2      26m
+
+NAME                                    AGE
+sealedsecret.bitnami.com/app-secret     26m
+sealedsecret.bitnami.com/mysql-secret   26m
+
+# you can access to application UI with port-forwarding at localhost:8080,
+# or of course you can install any of Ingress or LoadBalancer with your kind-cluster!
+% kubectl -n random-travelers port-forward svc/fastapi 8080:80
+# ...
 ```
 
 ## API directory layout
