@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.5.0](https://github.com/hwakabh/random-travelers/compare/v0.4.1...v0.5.0) (2024-12-25)
+
+
+### Features
+
+* **build:** added configs of railway. ([1efb526](https://github.com/hwakabh/random-travelers/commit/1efb526679b063b9b7da195eff0718fc06d8a05f))
+* **build:** added Nixpacks configurations. ([e810f8f](https://github.com/hwakabh/random-travelers/commit/e810f8fa86ec8e870a5095abc5f114da02ca3b6a))
+* **build:** enabled to configure MySQL TCP proxy ports of Railway. ([7e5e851](https://github.com/hwakabh/random-travelers/commit/7e5e851757433fd50b31401accb0a21ceafa1ea4))
+* **ci:** enabled pushing image to GHCR. ([7180018](https://github.com/hwakabh/random-travelers/commit/7180018f1d4d6e1cb4d61bfdbe92fb0715249acb))
+* **ci:** implemented actions of nixpacks. ([51c2021](https://github.com/hwakabh/random-travelers/commit/51c20214ffaf27ebb355907c8cf0c9eff1cabde5))
+* enabled to create database for first migration. ([33aec3d](https://github.com/hwakabh/random-travelers/commit/33aec3da0a6be164bd63be4ee617553e306641cf))
+
+
+### Bug Fixes
+
+* **build:** default parameters in Makefile. ([0582a19](https://github.com/hwakabh/random-travelers/commit/0582a193240128be6d59c01e78f400c7d434c9fb))
+
+
+### Dependencies
+
+* locked minimal Python version with 3.13.0. ([64e4fab](https://github.com/hwakabh/random-travelers/commit/64e4fab7c152ee11536b10da011106412352ee11))
+
+
+### Documentation
+
+* added information about builds/deployment. ([d16a200](https://github.com/hwakabh/random-travelers/commit/d16a200a6b7046aad2d3e976c5074ecb5604cfd2))
+* added instructions of sealed-secrets. ([1220a02](https://github.com/hwakabh/random-travelers/commit/1220a020739af11c60147edc4c424cc61d78a383))
+* added kind-cluster setup and Kustomization. ([560e4e2](https://github.com/hwakabh/random-travelers/commit/560e4e243561449c373eb707421b01ed1e9c7eb4))
+
 ## [0.4.1](https://github.com/hwakabh/random-travelers/compare/v0.4.0...v0.4.1) (2024-07-08)
 
 
