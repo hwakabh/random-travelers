@@ -8,6 +8,7 @@ on:
 
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}
+  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
 jobs:
   build_and_ship:
@@ -30,3 +31,8 @@ jobs:
         with:
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
+
+      - name: Deploy app to Railway
+        run: |
+          curl -fsSL https://railway.com/install.sh | sh
+          RAILWAY_TOKEN=${{ env.RAILWAY_TOKEN }} railway up --service random-travelers --ci

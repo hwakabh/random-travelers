@@ -1,3 +1,7 @@
+builds:
+- changed-files:
+  - any-glob-to-any-file: ['nixpacks.toml', 'Makefile']
+
 ci:
 - changed-files:
   - any-glob-to-any-file: ['.github/*.yml', '.github/*.yaml', '.github/workflows/**/*']
@@ -12,7 +16,7 @@ docs:
 
 deployment:
 - changed-files:
-  - any-glob-to-any-file: ['manifests/**/*']
+  - any-glob-to-any-file: ['manifests/**/*', 'railway.toml', 'nixpacks.toml', 'kind-cluster.yaml']
 
 tests:
 - changed-files:
