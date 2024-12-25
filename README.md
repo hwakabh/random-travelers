@@ -76,6 +76,11 @@ You can create all Kubernetes resources from manifests in this repository, after
 
 ```shell
 % kind create cluster --config kind-cluster.yaml
+
+# Install sealed-secret-controllers
+% kubectl apply -f ./manifests/controllers/sealed-secret-controller.yaml
+
+# Install application resources
 % kubectl apply -f ./manifests
 ```
 
@@ -87,8 +92,28 @@ For local:
 ```
 
 In production env, where we expect to run app on Railway, they are mounted to app with Variables of Railway apps. \
-But for security consideration, we will use Sealed Secret to hide confidential information from GitHub, so you have to install sealed-secret-controller first to the Kubernetes cluster that you will use need, if you use your BYO cluster.
+But for security consideration, we will use [Sealed Secret](https://github.com/bitnami-labs/sealed-secrets) to hide confidential information from GitHub, so you have to install sealed-secret-controller first to the Kubernetes cluster that you will use need, if you use your BYO cluster.
 
+For updating each environmental variables to be sealed, you need to install `kubeseal` commands to interact with sealed-secret-controller, then you need to create generic Secret resources:
+```shell
+% cat << EOF |kubeseal - -o yaml |kubectl apply -f -
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: random-travelers
+  labels:
+    app: random-travelers
+type: Opaque
+data:
+  MYSQL_HOST: $(echo -n YOUR_VALUE |base64)
+  MYSQL_USER: $(echo -n YOUR_VALUE |base64)
+  MYSQL_PASSWORD: $(echo -n YOUR_VALUE |base64)
+  MYSQL_DATABASE: $(echo -n YOUR_VALUE |base64)
+  GOOGLE_MAPS_API_KEY: $(echo -n YOUR_VALUE |base64)
+EOF
+```
 
 ## API directory layout
 Application root for API: `app/*`
