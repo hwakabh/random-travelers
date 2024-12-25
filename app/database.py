@@ -12,7 +12,7 @@ ENGINE_URL = "mysql+mysqlconnector://{user}:{password}@{host}:{port}".format(
     user=app_settings.MYSQL_USER,
     password=app_settings.MYSQL_PASSWORD,
     host=app_settings.MYSQL_HOST,
-    port=3306,
+    port=app_settings.MYSQL_PORT,
 )
 
 # Create database for first migrations
