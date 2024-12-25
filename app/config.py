@@ -8,6 +8,7 @@ class AppSettings(BaseSettings):
     MYSQL_USER: str = 'root'
     MYSQL_PASSWORD: str = 'root'
     MYSQL_DATABASE: str = 'rt'
+    MYSQL_PORT: str = '3306'
 
     GOOGLE_MAPS_API_KEY: str = ''
 
