@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/hwakabh/random-travelers/compare/v0.5.0...v0.6.0) (2024-12-25)
+
+
+### Features
+
+* **deploy:** added commands with railway-cli to Publish CI. ([8b21b71](https://github.com/hwakabh/random-travelers/commit/8b21b71a31c6f3c9dcc9a88a6f4db082447bb4de))
+
+
+### Bug Fixes
+
+* **deployment:** explicitly configured replicas and regions. ([f27e306](https://github.com/hwakabh/random-travelers/commit/f27e3063fadd05e4f56c991f3083440587792bb8))
+
 ## [0.5.0](https://github.com/hwakabh/random-travelers/compare/v0.4.1...v0.5.0) (2024-12-25)
 
 
