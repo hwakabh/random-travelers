@@ -4,6 +4,7 @@ from app.database import Base
 
 
 class Airport(Base):
+    # Schema: https://openflights.org/data.php#airport
     __tablename__ = 'airport'
 
     id: int = Column(Integer, primary_key=True, autoincrement=True)
