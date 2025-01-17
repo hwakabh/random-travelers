@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -5,11 +7,32 @@ from mako.template import Template
 
 from app.api.v0.routers import router as router_v0
 from app.api.v1.routers import router as router_v1
+from app.api.v1 import models
+from app.database import engine, insert_fixtures
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Create table if not exists on application startup
+    models.Base.metadata.create_all(bind=engine)
+    # Load fixture data (TODO: add precheck logics for avoiding duplication error)
+    filename = 'sql/airport.csv'
+    is_initialized = insert_fixtures(filename=filename)
+    if not is_initialized:
+        print('Failed to insert fixture data ...')
+
+    yield
+
+    try:
+        print("Shutting down the applications ...")
+    except Exception as e:
+        pinrt(e)
 
 
 app = FastAPI(
     title='random-travelers',
     description='API to communicate with backend database',
+    lifespan=lifespan
 )
 
 app.mount(
