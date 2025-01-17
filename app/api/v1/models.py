@@ -15,8 +15,8 @@ class Airport(Base):
     latitude: float = Column(Float)
     longitude: float = Column(Float)
     altitude: int = Column(Integer)
-    tz_offset: float = Column(Float)
-    DST: str = Column(String(1))
+    tz_offset: float = Column(String(256))  # generally int values like 10, but there is the case with string value `\\N`
+    DST: str = Column(String(3))  # generally DST value is: E,A,S,O,Z,N,U but there is the case `\\N`
     tz_dbtime: str = Column(String(32))
     types: str = Column(String(13))
     datasource: str = Column(String(13))
