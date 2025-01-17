@@ -28,7 +28,7 @@ def dist_on_sphere(
 
 
 def convert_csv_to_list(f: str) -> list:
-    data = genfromtxt(f, delimiter=',', skip_header=1, converters={0: lambda s: str(s)}, dtype=None, encoding=None)
+    data = genfromtxt(f, delimiter=',', skip_header=0, converters={0: lambda s: str(s)}, dtype=None, encoding=None)
     return data.tolist()
 
 
