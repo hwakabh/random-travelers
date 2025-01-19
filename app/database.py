@@ -33,11 +33,12 @@ def get_db():
         autoflush=False,
         bind=engine
     )
+    session_local = db()
 
     try:
-        yield db
+        yield session_local
     finally:
-        db.close()
+        session_local.close()
 
 
 def insert_fixtures(filename) -> bool:
