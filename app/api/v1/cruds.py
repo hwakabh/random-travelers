@@ -13,7 +13,7 @@ def get_destination(db: Session, req: schemas.SearchRequestBody) -> schemas.Sear
     #--- get ajax POST data
     print(f'User conditions: {req}')
 
-    #--- search and get near airport from MySQL (airport table)
+    #--- search and get near airport from MySQL (origin)
     near_airport_IATA = get_nearest_airport_name_from_db(
         db=db,
         lat=req.current_lat,
@@ -24,12 +24,12 @@ def get_destination(db: Session, req: schemas.SearchRequestBody) -> schemas.Sear
     #--- search and get reachable location (airport and country) from skyscanner api
     #--- exclude if time and travel expenses exceed the user input parameter
     #--- select a country at random
-    destination = get_destination_from_skyscanner_by_random_from_db(
+    destination = get_destination_by_random_from_db(
         db=db,
         iata=near_airport_IATA
     )
-    print('Destination: ')
-    print(destination)
+    print(f'Destination Country: {destination.get('dest_country')}')
+    print(f'Destination City: {destination.get('dest_city')}')
 
     return schemas.SearchResultResponseBody(**destination)
 
@@ -50,7 +50,8 @@ def get_nearest_airport_name_from_db(db: Session, lat: float, lng: float) -> str
         models.Airport.latitude,
         models.Airport.longitude
     ).filter(
-        models.Airport.IATA != "NULL"
+        models.Airport.IATA != "NULL",
+        models.Airport.IATA != "\\N"
     ).all()
 
     for airport in airports:
@@ -67,17 +68,15 @@ def get_nearest_airport_name_from_db(db: Session, lat: float, lng: float) -> str
     return dist_result[np.argmin(search_key)][2]
 
 
-#--- search and get reachable location (airport and country) from skyscanner api
-#--- exclude if time and travel expenses exceed the user input parameter
-#--- select a country at random
-def get_destination_from_skyscanner_by_random_from_db(db: Session, iata: str) -> dict:
-    # --- search and get reachable location (airport and country) from skyscanner api
-    # --- exclude if time and travel expenses exceed the user input parameter
-
-    airport_codes = db.query(models.Airport.IATA).filter(models.Airport.IATA != "NULL").all()
+#--- search and get reachable location (airport and country)
+def get_destination_by_random_from_db(db: Session, iata: str) -> dict:
+    airport_codes = db.query(models.Airport.IATA).filter(
+      models.Airport.IATA != "NULL",
+      models.Airport.IATA != "\\N",
+    ).all()
 
     reachable_airport_IATA = [airport_code[0] for airport_code in airport_codes]
-    #--- select a country at random
+    #--- select destination IATA code randomly (this will cover random choice of contries)
     random_airport_IATA = random.choice(reachable_airport_IATA)
 
     #--- get lat/lng of near and selected airport from MySQL (airport table)

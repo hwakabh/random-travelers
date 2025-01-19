@@ -28,8 +28,8 @@ def fetch() -> Response:
 @router.post('/shuffle')
 def get_random_country(payload: schemas.SearchRequestBody, db: Session = Depends(get_db)) -> schemas.SearchResultResponseBody:
 
-    country = services.get_random_country()
-    print(f'Randomly selected country: {country}')
+    # country = services.get_random_country()
+    # print(f'Randomly selected country: {country}')
 
     return cruds.get_destination(db=db, req=payload)
 
