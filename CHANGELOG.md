@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/hwakabh/random-travelers/compare/v0.5.0...v0.6.0) (2025-01-19)
+
+
+### Features
+
+* **database:** added functions for loading initial data to MySQL. ([fc22087](https://github.com/hwakabh/random-travelers/commit/fc220879a8b6d402048e0781d0fa63aa8a19f6cb))
+* **deploy:** added commands with railway-cli to Publish CI. ([8b21b71](https://github.com/hwakabh/random-travelers/commit/8b21b71a31c6f3c9dcc9a88a6f4db082447bb4de))
+* enabled initialization logic with asynccontextmanager and FastAPI lifespan. ([1c84ee5](https://github.com/hwakabh/random-travelers/commit/1c84ee5144b8c5abf38236e4ae0109ca894c6344))
+
+
+### Bug Fixes
+
+* **deployment:** explicitly configured replicas and regions. ([f27e306](https://github.com/hwakabh/random-travelers/commit/f27e3063fadd05e4f56c991f3083440587792bb8))
+
 ## [0.5.0](https://github.com/hwakabh/random-travelers/compare/v0.4.1...v0.5.0) (2024-12-25)
 
 
