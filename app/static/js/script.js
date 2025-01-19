@@ -105,11 +105,11 @@ function executeShuffle(){
 
     //--- display the location of random selected country on a google map.
     var current_LatLng = new google.maps.LatLng(current_lat, current_lng);
-    var transit_LatLng = new google.maps.LatLng(result["tran_lat"], result["tran_lng"]);
+    // var transit_LatLng = new google.maps.LatLng(result["tran_lat"], result["tran_lng"]);
     var destination_LatLng = new google.maps.LatLng(result["dest_lat"], result["dest_lng"]);
 
     console.log("current: " + "[latlng]" + current_LatLng);
-    console.log("transit: " + "[country]" + result["tran_country"] + " [airport]" + result["tran_airport"] + " [latlng]" + transit_LatLng);
+    // console.log("transit: " + "[country]" + result["tran_country"] + " [airport]" + result["tran_airport"] + " [latlng]" + transit_LatLng);
     console.log("destination: " + "[country]" + result["dest_country"] + " [airport]" + result["dest_airport"] + " [latlng]" + destination_LatLng);
 
     //var bounds = new google.maps.LatLngBounds();
@@ -125,11 +125,11 @@ function executeShuffle(){
       position : current_LatLng
     });
     //bounds.extend (marker.position);
-    var marker = new google.maps.Marker({
-      map : map,
-      position : transit_LatLng
-    });
-    //bounds.extend (marker.position);
+    // var marker = new google.maps.Marker({
+    //   map : map,
+    //   position : transit_LatLng
+    // });
+    // //bounds.extend (marker.position);
     var marker = new google.maps.Marker({
       map : map,
       position : destination_LatLng
@@ -138,7 +138,7 @@ function executeShuffle(){
     var flightPath = new google.maps.Polyline({
       path: [
         current_LatLng,
-        transit_LatLng,
+        // transit_LatLng,
         destination_LatLng
       ],
       geodesic: true,
