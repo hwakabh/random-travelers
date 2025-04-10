@@ -71,4 +71,3 @@ app.include_router(
     prefix='/api/v1',
     tags=['API v1'],
 )
-
