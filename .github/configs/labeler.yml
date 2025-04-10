@@ -1,6 +1,6 @@
 builds:
 - changed-files:
-  - any-glob-to-any-file: ['nixpacks.toml', 'Makefile']
+  - any-glob-to-any-file: ['Makefile']
 
 ci:
 - changed-files:
@@ -8,7 +8,7 @@ ci:
 
 deps:
 - changed-files:
-  - any-glob-to-any-file: ['pyproject.toml', 'poetry.lock']
+  - any-glob-to-any-file: ['pyproject.toml', 'poetry.lock', 'requirements.txt']
 
 docs:
 - changed-files:
@@ -16,7 +16,7 @@ docs:
 
 deployment:
 - changed-files:
-  - any-glob-to-any-file: ['manifests/**/*', 'railway.toml', 'nixpacks.toml', 'kind-cluster.yaml']
+  - any-glob-to-any-file: ['manifests/**/*', 'app.json', 'kind-cluster.yaml']
 
 tests:
 - changed-files:
