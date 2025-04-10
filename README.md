@@ -21,6 +21,9 @@ If you would like to run containers with docker command directly:
 % docker container ls
 CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                                       NAMES
 c0abdba6a3e6   bitnami/mysql:latest   "/opt/bitnami/script…"   30 seconds ago   Up 30 seconds   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp   rt
+
+# provide database url with fallbacks
+% export JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt'
 ```
 The environmental variables required by apps and its default values in application builds are described in Makefile. \
 Please check [`Makefile`](./Makefile) and you can customize them in yoru local environment.
