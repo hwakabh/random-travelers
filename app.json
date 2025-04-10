@@ -1,0 +1,23 @@
+{
+  "name": "random-travelers",
+  "scripts": {},
+  "env": {
+    "JAWSDB_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "jawsdb"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "stack": "heroku-24"
+}
