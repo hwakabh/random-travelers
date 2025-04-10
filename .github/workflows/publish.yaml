@@ -26,13 +26,13 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         # https://github.com/docker/login-action#github-container-registry
 
-      - name: Build and push Docker images
-        uses: iloveitaly/github-action-nixpacks@main
-        with:
-          push: true
-          tags: ${{ env.IMAGE_NAME }}:latest
+      # - name: Build and push Docker images
+      #   uses: iloveitaly/github-action-nixpacks@main
+      #   with:
+      #     push: true
+      #     tags: ${{ env.IMAGE_NAME }}:latest
 
-      - name: Deploy app to Railway
-        run: |
-          curl -fsSL https://railway.com/install.sh | sh
-          RAILWAY_TOKEN=${{ env.RAILWAY_TOKEN }} railway up --service random-travelers --ci
+      # - name: Deploy app to Railway
+      #   run: |
+      #     curl -fsSL https://railway.com/install.sh | sh
+      #     RAILWAY_TOKEN=${{ env.RAILWAY_TOKEN }} railway up --service random-travelers --ci
