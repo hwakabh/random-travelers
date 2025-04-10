@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/hwakabh/random-travelers/compare/v0.6.0...v0.6.1) (2025-04-10)
+
+
+### Documentation
+
+* added commnads for database fallbacks in local env. ([354f16f](https://github.com/hwakabh/random-travelers/commit/354f16f6952799a47669b26bb1fa317a9998e88b))
+
 ## [0.6.0](https://github.com/hwakabh/random-travelers/compare/v0.5.0...v0.6.0) (2025-01-19)
 
 
