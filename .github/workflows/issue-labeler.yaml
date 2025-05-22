@@ -19,6 +19,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # https://github.com/hwakabh/semantic-issue-action
+      - name: Check Issue Title
+        uses: hwakabh/semantic-issue-action@v0.5.8
+        with:
+          repo: 'hwakabh/random-travelers'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # https://github.com/github/issue-labeler
       - name: Label Issue
         uses: github/issue-labeler@v3.4
         with:
@@ -29,4 +37,3 @@ jobs:
           # only checks issue titles
           include-title: 1
           include-body: 0
-        # https://github.com/github/issue-labeler
