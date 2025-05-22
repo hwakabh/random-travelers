@@ -25,6 +25,19 @@ class SearchRequestBody(BaseModel):
     current_lng: float
 
 
+# class SearchResultResponseBody(BaseModel):
+#     dest_country: str
+#     dest_city: str
+#     dest_iata: str
+#     dest_airport: str
+#     dest_lat: float
+#     dest_lng: float
+#     tran_country: str
+#     tran_city: str
+#     tran_iata: str
+#     tran_airport: str
+#     tran_lat: float
+#     tran_lng: float
 class SearchResultResponseBody(BaseModel):
     dest_country: str
     dest_city: str
@@ -32,12 +45,6 @@ class SearchResultResponseBody(BaseModel):
     dest_airport: str
     dest_lat: float
     dest_lng: float
-    tran_country: str
-    tran_city: str
-    tran_iata: str
-    tran_airport: str
-    tran_lat: float
-    tran_lng: float
 
 
 # Database Model

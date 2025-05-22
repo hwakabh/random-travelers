@@ -59,7 +59,7 @@ show: --check-poetry --check-docker ## Show related components for app
 	@echo ''
 
 
-all: ## Start all componentes of portal-core app
+all: ## Start all componentes of random-traveler app
 	@make db
 	@make install
 	@poetry run uvicorn app.main:app --port=3000 --reload &

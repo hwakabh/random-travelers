@@ -40,22 +40,22 @@ def translate_county_name(txt: str) -> str:
     return resp.get('data').get('translations')[0].get('translatedText')
 
 
-def get_random_country() -> str:
-    try:
-        url = 'https://restcountries.com/v3.1/all?fields=region,name'
-        data = httpx.get(url).json()
+# def get_random_country() -> str:
+#     try:
+#         url = 'https://restcountries.com/v3.1/all?fields=region,name'
+#         data = httpx.get(url).json()
 
-    except httpx.HTTPError as e:
-        print('HTTPError: ', e)
+#     except httpx.HTTPError as e:
+#         print('HTTPError: ', e)
 
-    except json.JSONDecodeError as e:
-        print('JSONDecodeError: ', e)
+#     except json.JSONDecodeError as e:
+#         print('JSONDecodeError: ', e)
 
-    # Fetch regions list with removing duplication
-    regions = sorted(set([country.get('region') for country in data]))
-    region = random.choice(regions)
+#     # Fetch regions list with removing duplication
+#     regions = sorted(set([country.get('region') for country in data]))
+#     region = random.choice(regions)
 
-    # Select country randomly
-    countries = [c.get('name').get('official') for c in data if c.get('region') == region]
+#     # Select country randomly
+#     countries = [c.get('name').get('official') for c in data if c.get('region') == region]
 
-    return random.choice(countries)
+#     return random.choice(countries)
