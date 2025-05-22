@@ -1,32 +1,35 @@
 # random-travelers
 People who make thier decisions decided by Cloud Native
 
+<!-- *** -->
 ## Prerequisites
-Since random-travelers application would handle location information, the app requires us to allow location service enabled in client side.
+Since random-travelers application would handle location information, the app requires us to **allow location service enabled** in client side.
 
+<!-- *** -->
 ## Run locally
 As random-travelers application requires relational database, we have to prepare database before starting application program. \
 The most handy and easy way to start database is using container, and considering security we basically expect [`bitnami/mysql`](https://bitnami.com/stack/mysql/containers) container for local docker environment. \
 For further information about `bitnami/mysql`, please refer [the sources in GitHub](https://github.com/bitnami/containers/tree/main/bitnami/mysql).
 
 Since we have prepared Makefile to launch app easily with some subcommands, just run:
+
 ```bash
+% export GOOGLE_MAPS_API_KEY="***"
+% export JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt'
+
+# This will invoke start up process both for application and databases
 % make all
 ```
 
 If you would like to run containers with docker command directly:
+
 ```bash
 # Start MySQL container with setting root password & creating database
 % docker run -d --name rt -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=rt bitnami/mysql:latest
 % docker container ls
 CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                                       NAMES
 c0abdba6a3e6   bitnami/mysql:latest   "/opt/bitnami/script…"   30 seconds ago   Up 30 seconds   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp   rt
-
-# provide database url with fallbacks
-% export JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt'
 ```
-The environmental variables required by apps and its default values in application builds are described in Makefile. \
-Please check [`Makefile`](./Makefile) and you can customize them in yoru local environment.
 
 For ruuning Python application locally, we have to install dependencies packages onto local, but we prefer to use virutalenv for creating separate/isolated Python runtime. \
 Code basis would be managed by poetry, so you can install deps simply like below:
@@ -35,11 +38,14 @@ Code basis would be managed by poetry, so you can install deps simply like below
 # Install dependencies
 % poetry install
 
-# Start app within virtualenv
+# Starting application inside virtualenv with configurations
+% export JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt'
+% export GOOGLE_MAPS_API_KEY="***"
 % poetry run uvicorn app.main:app --port=3000 --reload
 ```
 
 In case you would not use poetry:
+
 ```bash
 # Name of virtualenv `.venv` is just an example so you can use what you like
 % python -m venv .venv
@@ -49,31 +55,44 @@ In case you would not use poetry:
 % pip install -r requirements.txt
 % pip list
 
-# Starting application
+# Starting application with configurations
+% export JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt'
+% export GOOGLE_MAPS_API_KEY="***"
 % uvicorn app.main:app --port=3000 --reload
 ```
 
 Then you can confirm API for health check would be valid, so that application startup would have been successed
+
 ```bash
 # validate with /healthz
 % curl -X GET localhost:3000/healthz; echo
 {"status":"ok"}
 ```
 
+<!-- *** -->
 ## Builds and Deployments
-In this project, FastAPI application wll be deployed to [Railway](https://railway.com) as application platform. \
-As you can easily setup accounts with free trials, please visit [the official documents](https://docs.railway.com) for further references.
+### Image builds
+In this project, FastAPI application wll be deployed onto [Heroku](https://www.heroku.com) as application platform.
 
-In Railway, the steps for application builds as container image will be done by [Nixpacks](https://nixpacks.com/docs), and you can see its configurations in [`nixpacks.toml`](./nixpacks.toml). \
-As there is a lot of options for application builds, please also refer [the documents](https://nixpacks.com/docs/configuration/file) for more details.
-
-The applications on Railway is formed as contianers, and its container images will be sourced from GitHub Container Registry. \
-You can download the actual images built by Nixpacks in CI (GitHub Actions) from [GitHub Packages](https://github.com/hwakabh/random-travelers/pkgs/container/random-travelers).
+The applications on Heroku is formed as contianers, and its container images will be sourced from GitHub Container Registry. \
+On Heroku, it has great build system, [Buildpacks](https://devcenter.heroku.com/articles/buildpacks), which will create secure container image easily with its `Builders`, \
+and we can also use this Builder local or CI environment.
+You can download the actual images built by [Heroku Buildpacks](https://github.com/heroku/buildpacks) in CI (GitHub Actions) from [GitHub Packages](https://github.com/hwakabh/random-travelers/pkgs/container/random-travelers).
 
 ```shell
 % docker pull ghcr.io/hwakabh/random-travelers:latest
 ```
 
+For image builds, please refer more details with the following articles:
+- [Buildpacks.io](https://buildpacks.io)
+- [pack-cli](https://github.com/buildpacks/pack)
+
+### Heroku Deployment
+Heroku, where `random-travelers` app has been hosted, has features to connect Git repository and its deployment (app source) called Automatic Deploys as a part of [GitHub integrations](https://devcenter.heroku.com/articles/github-integration).
+
+So once we will make changes on `main` branch on this repo, the changes has been immediately applied to production apps, and this will realize Continous Deliveries of app with lower operational costs.
+
+### Kubernetes Deployment
 Also in case you would like to deploy application on Kubernetes clusters, you can have an options to deploy apps onto [KinD](https://kind.sigs.k8s.io) cluster in your local environment. \
 You can create all Kubernetes resources from manifests in this repository, after [the installations](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) of `kind` commands:
 
@@ -103,13 +122,25 @@ data:
 EOF
 ```
 
-## Environmental Variables of GOOGLE_MAPS_API_KEY
+<!-- *** -->
+## Environmental Variables
+### JAWSDB_URL
+This value will be used for application to know what database should be connected. \
+On Heroku, we can use JawsDB, MySQL as a Service, with free costs, and the URL of JawsDB will represent as the following format:
 
-For local:
 ```shell
-% export GOOGLE_MAPS_API_KEY='xxx'
+{db_protocol}://{db_username}:{db_password}@{db_hostname}:{db_port}/{db_database_name}
 ```
 
+Currently we have only supported MySQL as application backend with using [`mysql-connector-python`](https://github.com/mysql/mysql-connector-python), but once you customized the parse logic of `JAWSDB_URL`, you will be able to use another database as backend database.
+
+For running application locally, `bitnami/mysql` container will be expected as first choice, so the value would looks like:
+
+```shell
+mysql://root:root@0.0.0.0:3306/rt
+```
+
+### GOOGLE_MAPS_API_KEY
 In production env, where we expect to run app on Railway, they are mounted to app with Variables of Railway apps. \
 But for security consideration, we will use [Sealed Secret](https://github.com/bitnami-labs/sealed-secrets) to hide confidential information from GitHub, so you have to install sealed-secret-controller first to the Kubernetes cluster that you will use need, if you use your BYO cluster.
 
@@ -173,22 +204,3 @@ sealedsecret.bitnami.com/mysql-secret   26m
 % kubectl -n random-travelers port-forward svc/fastapi 8080:80
 # ...
 ```
-
-## API directory layout
-Application root for API: `app/*`
-- `database.py` and `config.py`
-  - The configuration parameters for application
-  - Determine where/how to connect
-
-API Specifics structures in `app/api/v1/*`
-- `routers.py`: Application URL routings with CRUDs and Services
-  - Routers itself is responsible on dispatching, so that it lies on top with CRUDs/Services
-
-- `cruds.py`: Database operations using with models
-  - `models.py`: Table definitions with ORM
-
-- `services.py`: Operations with other services including external endpoints
-
-- `schemas.py`: Contains Request/Response models
-
-- `helpers.py`: Helper functions for CRUDs/Services
