@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.3](https://github.com/hwakabh/random-travelers/compare/v0.6.2...v0.6.3) (2025-05-25)
+
+
+### Bug Fixes
+
+* **ci:** syntax error on stale-issue. ([9e353c4](https://github.com/hwakabh/random-travelers/commit/9e353c44a4bb291705f9f150b7acda0552d2900b))
+
 ## [0.6.2](https://github.com/hwakabh/random-travelers/compare/v0.6.1...v0.6.2) (2025-05-25)
 
 
