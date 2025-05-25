@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.7.0](https://github.com/hwakabh/random-travelers/compare/v0.6.3...v0.7.0) (2025-05-25)
+
+
+### Features
+
+* added error-handling of translate API. ([d895d86](https://github.com/hwakabh/random-travelers/commit/d895d868bbc6637531224d7b992307921542bc05))
+* added prechecks before loading fixtures. ([b69cb96](https://github.com/hwakabh/random-travelers/commit/b69cb96bf9c39ee193debd1ba3feec3d10fd7e1f))
+* enabled to fetch fixture data dynamically. ([dc2275c](https://github.com/hwakabh/random-travelers/commit/dc2275cdab179bb18b972b78eb3e35d32626e383))
+
 ## [0.6.3](https://github.com/hwakabh/random-travelers/compare/v0.6.2...v0.6.3) (2025-05-25)
 
 
