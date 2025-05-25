@@ -28,8 +28,8 @@ jobs:
     name: Clean up staled issue
     runs-on: ubuntu-24.04
     steps:
-      - name: Delete old images
-      - uses: actions/stale@v9
+      - name: Stale issue
+        uses: actions/stale@v9
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           stale-issue-message: "This issue is stale because it has been open for 14 days with no activity."
