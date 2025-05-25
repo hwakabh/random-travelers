@@ -1,6 +1,7 @@
 from math import sin, cos, acos, radians
+import csv
 
-from numpy import genfromtxt
+import httpx
 
 # Helper functions for cruds.py
 #--- Distance calculation between two points
@@ -27,9 +28,15 @@ def dist_on_sphere(
     return acos(sum(x * y for x, y in zip(src_xyz, dst_xyz))) * radius
 
 
-def convert_csv_to_list(f: str) -> list:
-    data = genfromtxt(f, delimiter=',', skip_header=0, converters={0: lambda s: str(s)}, dtype=None, encoding=None)
-    return data.tolist()
-
-
 # Helper functions for services.py
+
+# Helper functions for database.py
+def fetch_airport_data() -> list:
+    # Raw data of https://github.com/jpatokal/openflights/blob/master/data/airports.dat
+    url = "https://raw.githubusercontent.com/jpatokal/openflights/refs/heads/master/data/airports.dat"
+    try:
+        dat = httpx.get(url).text
+    except:
+        return []
+
+    return [ r for r in csv.reader(dat.strip().splitlines()) ]
