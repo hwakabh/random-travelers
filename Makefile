@@ -55,14 +55,14 @@ show: --check-poetry --check-docker ## Show related components for app
 	@docker container ls --all
 	@echo ''
 	@echo ">>> Application process"
-	@ps -ef |grep uvicorn |grep -v 'grep' || true
+	@ps -ef |grep random-travelers |grep -v 'grep' || true
 	@echo ''
 
 
 all: ## Start all componentes of random-traveler app
 	@make db
 	@make install
-	@JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt' poetry run uvicorn app.main:app --port=3000 --reload &
+	@JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt' poetry run python run.py &
 
 
 clean: ## Remove components
@@ -71,7 +71,7 @@ clean: ## Remove components
 	@docker rm ${MYSQL_CONTAINER_NAME} 2> /dev/null || true
 	@echo ''
 	@echo ">>> Stopping application process ..."
-	@pkill -f uvicorn || true
+	@kill -9 `pgrep -f 'python' |pgrep -f 'random-travelers'` || true
 	@echo ''
 	@echo ">>> Cleaning up container network ..."
 	@echo ''

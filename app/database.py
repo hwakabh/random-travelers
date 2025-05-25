@@ -1,11 +1,10 @@
 # from datetime import datetime
-
 from sqlalchemy import create_engine, Column, DateTime, text
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 from app.config import app_settings
 from app.api.v1 import models
-from app.api.v1.helpers import convert_csv_to_list
+from app.api.v1.helpers import fetch_airport_data
 
 
 # dialect for using with mysql-connector-python
@@ -41,16 +40,22 @@ def get_db():
         session_local.close()
 
 
-def insert_fixtures(filename) -> bool:
+def insert_fixtures() -> bool:
     try:
         # TODO: make DRY with database.py
         session = sessionmaker()
         session.configure(bind=engine)
         s = session()
 
-        # TODO: make dynamic (refs: #128)
-        data: list = convert_csv_to_list(f=filename)
-        print(f'Loading data from {filename} ...')
+        if s.query(models.Airport).count() != 0:
+            print('Initiated, fixture data already loaded.')
+            return True
+
+        data: list = fetch_airport_data()
+        if data == []:
+            print('Failed to fetch raw-data from remote')
+            return False
+
         for i in data:
             record = models.Airport(**{
                 'id' : i[0],
@@ -69,8 +74,10 @@ def insert_fixtures(filename) -> bool:
                 'datasource': i[13],
             })
             s.add(record)
-        print(f'Loaded {len(data)} lines into MySQL')
         s.commit()
+
+        print(f'Loaded {len(data)} lines into MySQL')
+
     except Exception as e:
         print(f'Error on inserting fixtures: {e}')
         s.rollback()
@@ -92,6 +99,9 @@ def insert_fixtures(filename) -> bool:
 #         default=datetime.now,
 #         nullable=False,
 #         server_default=text("current_timestamp"))
-
+#
+# # when used, the child class in models.py should be looked like:
+# class Airport(TimeStampMixin, Base):
+# ...
 
 Base = declarative_base()

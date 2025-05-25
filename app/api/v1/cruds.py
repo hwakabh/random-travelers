@@ -72,7 +72,6 @@ def get_nearest_airport_name_from_db(db: Session, lat: float, lng: float) -> str
 
 def get_random_destination_from_db(db: Session) -> dict:
     airport_codes = db.query(models.Airport.IATA).filter(
-      models.Airport.IATA != "NULL",
       models.Airport.IATA != "\\N",
     ).all()
 
