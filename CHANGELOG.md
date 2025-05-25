@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.2](https://github.com/hwakabh/random-travelers/compare/v0.6.1...v0.6.2) (2025-05-25)
+
+
+### Bug Fixes
+
+* **build:** added fallback URL of MySQL credentials for Uvicorn app. ([39b2a92](https://github.com/hwakabh/random-travelers/commit/39b2a92d027082f5577efef4d42dcc4f5963304b))
+* **database:** error on sesison closing in get_db(). ([0f2ba2b](https://github.com/hwakabh/random-travelers/commit/0f2ba2b29b3db2728d899effa5be204014c4c716))
+* **db:** current query filters with escape chars. ([1c17126](https://github.com/hwakabh/random-travelers/commit/1c1712688e72f703b9a998bad40826bae96b376d))
+
+
+### Documentation
+
+* fixed descriptions with removing Railway and Nixpack stuffs. ([43eac89](https://github.com/hwakabh/random-travelers/commit/43eac8989c556f98c872a4aa9b3fbf8939762e59))
+
 ## [0.6.1](https://github.com/hwakabh/random-travelers/compare/v0.6.0...v0.6.1) (2025-04-10)
 
 
