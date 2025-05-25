@@ -15,9 +15,8 @@ from app.database import engine, insert_fixtures
 async def lifespan(app: FastAPI):
     # Create table if not exists on application startup
     models.Base.metadata.create_all(bind=engine)
-    # Load fixture data (TODO: add precheck logics for avoiding duplication error)
-    filename = 'sql/airport.csv'
-    is_initialized = insert_fixtures(filename=filename)
+    # Load fixture data
+    is_initialized = insert_fixtures()
     if not is_initialized:
         print('Failed to insert fixture data ...')
 

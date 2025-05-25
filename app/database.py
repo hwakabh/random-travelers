@@ -40,12 +40,16 @@ def get_db():
         session_local.close()
 
 
-def insert_fixtures(filename) -> bool:
+def insert_fixtures() -> bool:
     try:
         # TODO: make DRY with database.py
         session = sessionmaker()
         session.configure(bind=engine)
         s = session()
+
+        if s.query(models.Airport).count() != 0:
+            print('Initiated, fixture data already loaded.')
+            return True
 
         data: list = fetch_airport_data()
         if data == []:
@@ -70,8 +74,10 @@ def insert_fixtures(filename) -> bool:
                 'datasource': i[13],
             })
             s.add(record)
-        print(f'Loaded {len(data)} lines into MySQL')
         s.commit()
+
+        print(f'Loaded {len(data)} lines into MySQL')
+
     except Exception as e:
         print(f'Error on inserting fixtures: {e}')
         s.rollback()
@@ -93,6 +99,9 @@ def insert_fixtures(filename) -> bool:
 #         default=datetime.now,
 #         nullable=False,
 #         server_default=text("current_timestamp"))
-
+#
+# # when used, the child class in models.py should be looked like:
+# class Airport(TimeStampMixin, Base):
+# ...
 
 Base = declarative_base()
