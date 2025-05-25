@@ -62,7 +62,7 @@ show: --check-poetry --check-docker ## Show related components for app
 all: ## Start all componentes of random-traveler app
 	@make db
 	@make install
-	@poetry run uvicorn app.main:app --port=3000 --reload &
+	@JAWSDB_URL='mysql://root:root@0.0.0.0:3306/rt' poetry run uvicorn app.main:app --port=3000 --reload &
 
 
 clean: ## Remove components
