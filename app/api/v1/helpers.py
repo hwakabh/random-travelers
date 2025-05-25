@@ -34,6 +34,8 @@ def dist_on_sphere(
 def fetch_airport_data() -> list:
     # Raw data of https://github.com/jpatokal/openflights/blob/master/data/airports.dat
     url = "https://raw.githubusercontent.com/jpatokal/openflights/refs/heads/master/data/airports.dat"
+    print(f'Making API call with: {url}')
+
     try:
         dat = httpx.get(url).text
     except:

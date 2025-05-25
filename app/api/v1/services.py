@@ -31,6 +31,7 @@ def translate_county_name(txt: str) -> str:
         return ""
 
     url = f'https://translation.googleapis.com/language/translate/v2?key={API_KEY}&q={txt}&source=en&target=ja'
+    print(f'Making API call with: {url}')
 
     # Spoofing referer for Cloud Translate API
     resp = httpx.post(url, headers={"Referer": "http://localhost:3000/"}).json()
