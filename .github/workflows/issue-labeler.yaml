@@ -21,7 +21,7 @@ jobs:
 
       # https://github.com/hwakabh/semantic-issue-action
       - name: Check Issue Title
-        uses: hwakabh/semantic-issue-action@v0.5.10
+        uses: hwakabh/semantic-issue-action@v0.5.11
         with:
           repo: 'hwakabh/random-travelers'
           token: ${{ secrets.GITHUB_TOKEN }}
