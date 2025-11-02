@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/hwakabh/random-travelers/compare/v0.7.0...v0.7.1) (2025-11-02)
+
+
+### Bug Fixes
+
+* migrated from bitnami/mysql to bitnamilegacy/mysql images. ([67f53bc](https://github.com/hwakabh/random-travelers/commit/67f53bc9fd7abe32fa204cbb5b69aa99429a7e38))
+
 ## [0.7.0](https://github.com/hwakabh/random-travelers/compare/v0.6.3...v0.7.0) (2025-05-25)
 
 
