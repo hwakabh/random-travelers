@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: bitnami/mysql:latest
+        image: bitnamilegacy/mysql:latest
         imagePullPolicy: Always
         volumeMounts:
         - mountPath: /opt/bitnami/mysql/data

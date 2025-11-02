@@ -34,7 +34,7 @@ db: --check-docker ## Starting MySQL container
 		--health-interval 10s \
 		--health-retries 5 \
 		--health-timeout 5s \
-		bitnami/mysql:latest
+		bitnamilegacy/mysql:latest
 	@while [ "`docker inspect -f {{.State.Health.Status}} ${MYSQL_CONTAINER_NAME}`" != "healthy" ]; do \
 		sleep 3; \
 	done
