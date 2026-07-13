@@ -1,4 +1,9 @@
 # random-travelers
+THIS PROJECT HAS BEEN ARCHIVED WITH MIGRATED FROM GITHUB. \
+FOR FUTURE MAINTENANCE, SEE https://gitlab.com/hwakabh-dev/random-travelers
+
+---
+
 People who make thier decisions decided by Cloud Native
 
 <!-- *** -->
