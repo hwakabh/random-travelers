@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.2](https://github.com/hwakabh/random-travelers/compare/v0.7.1...v0.7.2) (2026-07-13)
+
+
+### Documentation
+
+* added README with archival notice ([1b0434d](https://github.com/hwakabh/random-travelers/commit/1b0434d2e2a4cd6c6907d9aa0a4cfc9e999904df))
+* added README with archival notice ([5223257](https://github.com/hwakabh/random-travelers/commit/52232572f03e9cb86d2f8efb7a42a52d2460be6a))
+
 ## [0.7.1](https://github.com/hwakabh/random-travelers/compare/v0.7.0...v0.7.1) (2025-11-02)
 
 
