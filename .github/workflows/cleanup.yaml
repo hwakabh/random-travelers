@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Delete old images
-        uses: snok/container-retention-policy@v2
+        uses: snok/container-retention-policy@v3.1.0
         with:
           image-names: random-travelers
           cut-off: 1 days ago JST
